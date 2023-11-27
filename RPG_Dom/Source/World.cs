@@ -25,8 +25,8 @@ namespace RPG_Dom
 
         public World()
         {
-            knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0), 0);
-            bullet = new Bullet("Assets\\item8BIT_sword", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0), 0);
+            knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0));
+            bullet = new Bullet("Assets\\item8BIT_sword", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0));
         }
 
         public virtual void Update()

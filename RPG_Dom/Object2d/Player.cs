@@ -25,7 +25,8 @@ namespace RPG_Dom
         }
 
 
-        public virtual void Update()
+        // override the update method of Object2d to perform below changes
+        public override void Update()
         {
 
             // Player sprite rotate towards cursor
@@ -54,7 +55,6 @@ namespace RPG_Dom
             {
                 pos = new Vector2(pos.X -= 1, pos.Y);
             }
-
 
         }
 

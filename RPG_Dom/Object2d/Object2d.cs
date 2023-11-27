@@ -38,27 +38,6 @@ namespace RPG_Dom
 
         public virtual void Update()
         {
-            // Player controlled directional movement 
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                pos = new Vector2(pos.X, pos.Y += 1);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                pos = new Vector2(pos.X, pos.Y -= 1);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                pos = new Vector2(pos.X += 1, pos.Y);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                pos = new Vector2(pos.X -= 1, pos.Y);
-            }
-
 
         }
 
