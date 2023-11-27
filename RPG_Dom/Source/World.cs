@@ -20,22 +20,25 @@ namespace RPG_Dom
     public class World
     {
     
-        public Player knight;
-            
+        public Object2d knight;
+        public Bullet bullet;
 
         public World()
         {
             knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0));
+            bullet = new Bullet("Assets\\shot", new Vector2(100, 100), new Vector2(50, 50), new Vector2(1, 0));
         }
-        
+
         public virtual void Update()
         {
             knight.Update();
+            bullet.Update();    
         }
         
         public virtual void Draw() 
         { 
             knight.Draw();
+            bullet.Draw();
         }
 
     

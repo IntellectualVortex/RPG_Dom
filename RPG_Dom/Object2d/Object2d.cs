@@ -17,11 +17,22 @@ using System.Xml.Linq;
 
 namespace RPG_Dom
 {
-    public class Player : Object2d
+    public class Object2d
     {
 
-        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL) : base(PATH, POS, DIMS, VEL) 
+        public Vector2 pos, dims, vel;
+        public Texture2D myObject;
+        public float rot;
+
+
+
+        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL)
         {
+            pos = POS;
+            dims = DIMS;
+            vel = VEL;
+
+            myObject = Globals.content.Load<Texture2D>(PATH);
         }
 
 
@@ -60,5 +71,5 @@ namespace RPG_Dom
 
     }
 
-
+    
 }
