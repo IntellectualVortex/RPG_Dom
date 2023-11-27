@@ -6,12 +6,12 @@ namespace RPG_Dom
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+
+        World world;
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            Globals.graphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -25,10 +25,10 @@ namespace RPG_Dom
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Globals.content = this.Content;
+            Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-
+            world = new World();
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,6 +37,7 @@ namespace RPG_Dom
                 Exit();
 
             // TODO: Add your update logic here
+            world.Update();
 
             base.Update(gameTime);
         }
@@ -46,6 +47,11 @@ namespace RPG_Dom
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+
+            world.Draw();
+
+            Globals.spriteBatch.End();
 
             base.Draw(gameTime);
         }
