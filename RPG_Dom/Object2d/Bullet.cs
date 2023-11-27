@@ -27,7 +27,7 @@ namespace RPG_Dom
 
         public virtual void Update()
         {
-
+            pos.X += .1f;
         }
 
         public virtual void Draw()

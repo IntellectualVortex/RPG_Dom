@@ -25,13 +25,19 @@ namespace RPG_Dom
         }
 
 
-
         public virtual void Update()
         {
+
+            // Player sprite rotate towards cursor
+            MouseState mouse = Mouse.GetState();
+            var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
+            Globals.playerRotation = (float)Math.Atan2(distance.Y, distance.X);
+
+
             // Player controlled directional movement 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                pos = new Vector2(pos.X, pos.Y += 1);
+                pos = new Vector2(pos.X, pos.Y += 1); Globals.playerRotation += 1f;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
@@ -54,8 +60,7 @@ namespace RPG_Dom
 
         public virtual void Draw()
         {
-            // Draw the selected model as a rectangle for hitbox and rotation measures
-            Globals.spriteBatch.Draw(myObject, new Microsoft.Xna.Framework.Rectangle((int)(pos.X), (int)(pos.Y), (int)(dims.X), (int)(dims.Y)), null, Microsoft.Xna.Framework.Color.White, rot, new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2), new SpriteEffects(), 0);
+            base.Draw();
         }
 
     }
