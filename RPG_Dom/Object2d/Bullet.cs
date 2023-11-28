@@ -25,12 +25,12 @@ namespace RPG_Dom
             
         }
 
-        public virtual void Update()
+        public override void Update()
         {
             pos.X += .1f;
         }
 
-        public virtual void Draw()
+        public override void Draw()
         {
             base.Draw();
         }

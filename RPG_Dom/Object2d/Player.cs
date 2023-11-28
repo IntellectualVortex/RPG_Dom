@@ -20,8 +20,11 @@ namespace RPG_Dom
     public class Player : Object2d
     {
 
+        float playerRot;
+
         public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL) : base(PATH, POS, DIMS, VEL) 
         {
+            playerRot = 0.0f;
         }
 
 
@@ -32,13 +35,19 @@ namespace RPG_Dom
             // Player sprite rotate towards cursor
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
-            Globals.playerRotation = (float)Math.Atan2(distance.Y, distance.X);
+            playerRot = (float)Math.Atan2(distance.Y, distance.X);
+          
+
+
+
+
+
 
 
             // Player controlled directional movement 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                pos = new Vector2(pos.X, pos.Y += 1); Globals.playerRotation += 1f;
+                pos = new Vector2(pos.X, pos.Y += 1);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
@@ -58,9 +67,11 @@ namespace RPG_Dom
 
         }
 
-        public virtual void Draw()
+        public override void Draw()
         {
-            base.Draw();
+            base.DrawWithRot(playerRot);
+
+            
         }
 
     }
