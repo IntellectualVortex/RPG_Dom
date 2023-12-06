@@ -19,7 +19,10 @@ namespace RPG_Dom
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            Globals.graphicsDeviceManager.IsFullScreen = false;
+            Globals.graphicsDeviceManager.PreferredBackBufferWidth = 1920;
+            Globals.graphicsDeviceManager.PreferredBackBufferHeight = 1080;
+            Globals.graphicsDeviceManager.ApplyChanges();
             base.Initialize();
         }
 

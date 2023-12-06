@@ -18,7 +18,7 @@ namespace RPG_Dom
 
         // Override the update method of Object2d to perform below changes
         public override void Update()
-        {
+        { 
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);

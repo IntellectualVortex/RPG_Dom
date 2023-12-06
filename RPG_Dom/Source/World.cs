@@ -26,21 +26,38 @@ namespace RPG_Dom
 
         public World()
         {
-            player = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(100, 100), new Vector2(1, 0), 0f);
+            player = new Player("Assets\\Knight", 
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth/2, 
+                Globals.graphicsDeviceManager.PreferredBackBufferHeight/2), 
+                new Vector2(100, 100), 
+                new Vector2(1, 0), 0f);
+
             objects.Add(player);    
         }
 
         public virtual void Update()
         {
-            
+
+            // 
+            for (var i = 0; i < objects.Count; i++)
+            {
+                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 200 ||
+                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 200 ||
+                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 200 ||
+                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 200)
+                {
+                    objects.Remove(objects[i]);
+                }
+            }
 
             MouseState mouse = Mouse.GetState();
 
-
-
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                objects.Add(new Bullet("Assets\\item8BIT_sword", new Vector2(player.pos.X, player.pos.Y), new Vector2(20, 20), new Vector2(0, 0), player.rot));
+                objects.Add(new Bullet("Assets\\item8BIT_sword", 
+                    new Vector2(player.pos.X, player.pos.Y), 
+                    new Vector2(20, 20), 
+                    new Vector2(0, 0), player.rot));
             }
 
             foreach (Object2d obj in objects)
