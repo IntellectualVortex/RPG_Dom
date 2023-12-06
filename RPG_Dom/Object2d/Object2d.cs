@@ -22,7 +22,7 @@ namespace RPG_Dom
 
         public Vector2 pos, dims, vel;
         public Texture2D myObject;
-
+        List<Bullet> bullets;
 
 
         public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL)

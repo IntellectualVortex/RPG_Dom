@@ -20,11 +20,13 @@ namespace RPG_Dom
     public class Player : Object2d
     {
 
-        float playerRot;
+        public float playerRot;
+        List<Bullet> bullets = new List<Bullet>(); 
+        public Bullet bullet;
 
         public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL) : base(PATH, POS, DIMS, VEL) 
         {
-            playerRot = 0.0f;
+        
         }
 
 
@@ -36,16 +38,26 @@ namespace RPG_Dom
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
             playerRot = (float)Math.Atan2(distance.Y, distance.X);
-          
 
 
 
+            // On mouse press, add Bullet object to bullet list
+
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                bullets.Add(new Bullet("Assets\\Knight", new Vector2(pos.X, pos.Y), new Vector2(100, 100), new Vector2(1, 0)));
+            }
+
+            // Loop through the list of bullets and update their position
+
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Update();
+            }
 
 
-
-
-            // Player controlled directional movement 
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+                // Player controlled directional movement 
+                if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 pos = new Vector2(pos.X, pos.Y += 1);
             }
@@ -69,6 +81,12 @@ namespace RPG_Dom
 
         public override void Draw()
         {
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.Draw();
+            }
+
+
             base.DrawWithRot(playerRot);
 
             

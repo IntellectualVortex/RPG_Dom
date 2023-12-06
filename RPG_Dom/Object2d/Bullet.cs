@@ -21,18 +21,26 @@ namespace RPG_Dom
 
     public class Bullet : Object2d
     {
+        public float bulletRot;
+
         public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL) : base(PATH, POS, DIMS, VEL) {
             
         }
 
         public override void Update()
         {
-            pos.X += .1f;
+            // Bullet rotation vector
+            MouseState mouse = Mouse.GetState();
+            var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
+            bulletRot = (float)Math.Atan2(distance.Y, distance.X);
+
+            vel = new Vector2((float)Math.Cos(bulletRot), (float)Math.Sin(bulletRot)) * 5f;
+            pos += vel;
         }
 
         public override void Draw()
         {
-            base.Draw();
+            base.DrawWithRot(bulletRot);
         }
 
     }
