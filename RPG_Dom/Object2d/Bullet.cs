@@ -18,9 +18,10 @@ using System.Xml.Linq;
 
 namespace RPG_Dom
 {
-
+    
     public class Bullet : Object2d
     {
+
 
         public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) {
             

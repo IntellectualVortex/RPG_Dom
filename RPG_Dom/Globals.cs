@@ -10,7 +10,5 @@ namespace RPG_Dom
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
         public static GraphicsDeviceManager graphicsDeviceManager;
-        public static float playerRot;
-       
     }
 }

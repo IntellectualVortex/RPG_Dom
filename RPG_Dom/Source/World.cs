@@ -19,24 +19,42 @@ namespace RPG_Dom
 {
     public class World
     {
-    
-        public Object2d knight;
+        List<Object2d> objects = new List<Object2d>();
+        public Player player;
         public Bullet bullet;
+        
 
         public World()
         {
-            knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(100, 100), new Vector2(1, 0), 0f);
-           
+            player = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(100, 100), new Vector2(1, 0), 0f);
+            objects.Add(player);    
         }
 
         public virtual void Update()
         {
-            knight.Update();   
+            
+
+            MouseState mouse = Mouse.GetState();
+
+
+
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                objects.Add(new Bullet("Assets\\item8BIT_sword", new Vector2(player.pos.X, player.pos.Y), new Vector2(20, 20), new Vector2(0, 0), player.rot));
+            }
+
+            foreach (Object2d obj in objects)
+            {
+                obj.Update();
+            } 
         }
         
         public virtual void Draw() 
-        { 
-            knight.Draw();
+        {
+            foreach (Object2d obj in objects)
+            {
+                obj.Draw();
+            }
         }
 
     
