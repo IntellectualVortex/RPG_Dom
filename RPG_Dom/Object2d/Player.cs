@@ -43,7 +43,6 @@ namespace RPG_Dom
             // On mouse press, add Bullet object to bullet list
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                
                 bullets.Add(new Bullet("Assets\\item8BIT_sword", new Vector2(pos.X, pos.Y), new Vector2(20, 20), new Vector2(0, 0), Globals.playerRot));
             }
 
@@ -55,7 +54,7 @@ namespace RPG_Dom
 
 
                 // Player controlled directional movement 
-                if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 pos = new Vector2(pos.X, pos.Y += 1);
             }
