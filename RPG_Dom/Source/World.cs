@@ -25,7 +25,7 @@ namespace RPG_Dom
 
         public World()
         {
-            knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(100, 100), new Vector2(1, 0));
+            knight = new Player("Assets\\Knight", new Vector2(100, 100), new Vector2(100, 100), new Vector2(1, 0), 0f);
            
         }
 

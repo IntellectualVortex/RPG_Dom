@@ -19,37 +19,35 @@ namespace RPG_Dom
 {
     public class Player : Object2d
     {
-
-        public float playerRot;
+       
         List<Bullet> bullets = new List<Bullet>(); 
         public Bullet bullet;
 
-        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL) : base(PATH, POS, DIMS, VEL) 
+        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
         {
         
         }
 
 
-        // override the update method of Object2d to perform below changes
+        // Override the update method of Object2d to perform below changes
         public override void Update()
         {
 
             // Player sprite rotate towards cursor
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
-            playerRot = (float)Math.Atan2(distance.Y, distance.X);
+            Globals.playerRot = (float)Math.Atan2(distance.Y, distance.X);
 
 
 
             // On mouse press, add Bullet object to bullet list
-
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                bullets.Add(new Bullet("Assets\\Knight", new Vector2(pos.X, pos.Y), new Vector2(100, 100), new Vector2(1, 0)));
+                
+                bullets.Add(new Bullet("Assets\\item8BIT_sword", new Vector2(pos.X, pos.Y), new Vector2(20, 20), new Vector2(0, 0), Globals.playerRot));
             }
 
             // Loop through the list of bullets and update their position
-
             foreach (Bullet bullet in bullets)
             {
                 bullet.Update();
@@ -87,7 +85,7 @@ namespace RPG_Dom
             }
 
 
-            base.DrawWithRot(playerRot);
+            base.DrawWithRot(Globals.playerRot);
 
             
         }

@@ -21,17 +21,19 @@ namespace RPG_Dom
     {
 
         public Vector2 pos, dims, vel;
+        public float rot;
         public Texture2D myObject;
-        List<Bullet> bullets;
 
 
-        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL)
+        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT)
         {
             pos = POS;
             dims = DIMS;
             vel = VEL;
+            rot = ROT;
 
             myObject = Globals.content.Load<Texture2D>(PATH);
+         
         }
 
 
