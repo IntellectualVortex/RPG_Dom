@@ -5,13 +5,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 #endregion
 
@@ -49,9 +42,9 @@ namespace RPG_Dom
 
             // Draw the selected model as a rectangle for hitbox and rotation measures
             Globals.spriteBatch.Draw(myObject,
-                new Microsoft.Xna.Framework.Rectangle((int)(pos.X), (int)(pos.Y), (int)(dims.X), (int)(dims.Y)),
+                new Rectangle((int)(pos.X), (int)(pos.Y), (int)(dims.X), (int)(dims.Y)),
                 null,
-                Microsoft.Xna.Framework.Color.White,
+                Color.White,
                 rot,
                 new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
                 new SpriteEffects(),

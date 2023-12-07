@@ -23,6 +23,7 @@ namespace RPG_Dom
         public Player player;
         public Bullet bullet;
         public MapTexture map; 
+        public Camera camera;
 
 
         public World()
@@ -35,7 +36,11 @@ namespace RPG_Dom
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(0, 0),
-                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth*2, Globals.graphicsDeviceManager.PreferredBackBufferHeight*2));
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth*2, Globals.graphicsDeviceManager.PreferredBackBufferHeight*2),
+                new Vector2(0, 0), 
+                0);
+
+            camera = new Camera();
 
             objects.Add(player);    
         }
@@ -45,8 +50,8 @@ namespace RPG_Dom
 
             for (var i = 0; i < objects.Count; i++)
             {
-                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 500 ||
-                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 500 ||
+                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 800 ||
+                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 800 ||
                     objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 500 ||
                     objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 500)
                 {
@@ -76,7 +81,6 @@ namespace RPG_Dom
 
             if (mouse.RightButton == ButtonState.Pressed)
             {
-
                 if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
                 {
                     objects.Add(new Bullet("Assets\\item8BIT_sword",
@@ -92,9 +96,12 @@ namespace RPG_Dom
             foreach (Object2d obj in objects)
             {
                 obj.Update();
-            } 
+            }
 
-            map.Update();
+            map.pos.X = camera.pos.X * -1f;
+            map.pos.Y = camera.pos.Y * -1f;
+            map.Update();   
+
         }
         
         public void Draw() 
