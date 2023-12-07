@@ -33,7 +33,9 @@ namespace RPG_Dom
                 new Vector2(100, 100), 
                 new Vector2(1, 0), 0f);
 
-            map = new MapTexture("Assets\\tex", new Vector2(0, 0), new Vector2(1920, 1080));
+            map = new MapTexture("Assets\\tex",
+                new Vector2(0, 0),
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth*2, Globals.graphicsDeviceManager.PreferredBackBufferHeight*2));
 
             objects.Add(player);    
         }
