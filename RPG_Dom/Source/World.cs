@@ -33,7 +33,7 @@ namespace RPG_Dom
                 new Vector2(100, 100), 
                 new Vector2(1, 0), 0f);
 
-            map = new MapTexture("tex", new Vector2(0, 0), new Vector2(1920, 1080));
+            map = new MapTexture("Assets\\tex", new Vector2(0, 0), new Vector2(1920, 1080));
 
             objects.Add(player);    
         }
@@ -43,10 +43,10 @@ namespace RPG_Dom
 
             for (var i = 0; i < objects.Count; i++)
             {
-                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 300 ||
-                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 300 ||
-                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 300 ||
-                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 300)
+                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 500 ||
+                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 500 ||
+                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 500 ||
+                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 500)
                 {
                     objects.Remove(objects[i]);
                 }
@@ -91,11 +91,13 @@ namespace RPG_Dom
             {
                 obj.Update();
             } 
+
+            map.Update();
         }
         
         public void Draw() 
         {
-
+            map.Draw(0f);
 
             foreach (Object2d obj in objects)
             {
