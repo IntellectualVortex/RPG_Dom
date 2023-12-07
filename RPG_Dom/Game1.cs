@@ -11,6 +11,7 @@ namespace RPG_Dom
 
         public Game1()
         {
+
             Globals.graphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -40,7 +41,7 @@ namespace RPG_Dom
                 Exit();
 
             // TODO: Add your update logic here
-            world.Update();
+            world.Update(gameTime);
 
             base.Update(gameTime);
         }

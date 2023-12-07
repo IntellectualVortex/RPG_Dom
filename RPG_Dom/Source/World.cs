@@ -24,6 +24,7 @@ namespace RPG_Dom
         public Bullet bullet;
         
 
+
         public World()
         {
             player = new Player("Assets\\Knight", 
@@ -35,29 +36,53 @@ namespace RPG_Dom
             objects.Add(player);    
         }
 
-        public virtual void Update()
+        public void Update(GameTime gameTime)
         {
 
-            // 
             for (var i = 0; i < objects.Count; i++)
             {
-                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 200 ||
-                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 200 ||
-                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 200 ||
-                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 200)
+                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 300 ||
+                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 300 ||
+                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 300 ||
+                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 300)
                 {
                     objects.Remove(objects[i]);
                 }
             }
 
+            
+            player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            player.secondaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             MouseState mouse = Mouse.GetState();
-
+            
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                objects.Add(new Bullet("Assets\\item8BIT_sword", 
-                    new Vector2(player.pos.X, player.pos.Y), 
-                    new Vector2(20, 20), 
+
+                if (player.primaryCooldownTimer >= player.playerPrimaryCooldownLength)
+                {
+                    objects.Add(new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(player.pos.X, player.pos.Y),
+                    new Vector2(20, 20),
                     new Vector2(0, 0), player.rot));
+
+                    player.primaryCooldownTimer = 0;
+                }
+
+            }
+
+            if (mouse.RightButton == ButtonState.Pressed)
+            {
+
+                if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
+                {
+                    objects.Add(new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(player.pos.X, player.pos.Y),
+                    new Vector2(50, 50),
+                    new Vector2(0, 0), player.rot));
+
+                    player.secondaryCooldownTimer = 0;
+                }
+
             }
 
             foreach (Object2d obj in objects)
@@ -66,7 +91,7 @@ namespace RPG_Dom
             } 
         }
         
-        public virtual void Draw() 
+        public void Draw() 
         {
             foreach (Object2d obj in objects)
             {
