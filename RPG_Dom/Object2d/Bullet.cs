@@ -33,9 +33,9 @@ namespace RPG_Dom
             pos += vel;
         }
 
-        public override void Draw()
+        public void Draw()
         {
-            base.Draw();
+            base.Draw(1f);
         }
 
     }

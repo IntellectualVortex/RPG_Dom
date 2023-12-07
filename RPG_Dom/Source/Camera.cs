@@ -15,7 +15,6 @@ namespace RPG_Dom
         public Camera()
         {
 
-
         }
 
 

@@ -1,5 +1,5 @@
 ﻿#region Includes
-using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -22,7 +22,7 @@ namespace RPG_Dom
         List<Object2d> objects = new List<Object2d>();
         public Player player;
         public Bullet bullet;
-        
+        public MapTexture map; 
 
 
         public World()
@@ -32,6 +32,8 @@ namespace RPG_Dom
                 Globals.graphicsDeviceManager.PreferredBackBufferHeight/2), 
                 new Vector2(100, 100), 
                 new Vector2(1, 0), 0f);
+
+            map = new MapTexture("tex", new Vector2(0, 0), new Vector2(1920, 1080));
 
             objects.Add(player);    
         }
@@ -93,9 +95,11 @@ namespace RPG_Dom
         
         public void Draw() 
         {
+
+
             foreach (Object2d obj in objects)
             {
-                obj.Draw();
+                obj.Draw(1f);
             }
         }
 
