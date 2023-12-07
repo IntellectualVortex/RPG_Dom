@@ -97,11 +97,11 @@ namespace RPG_Dom
         
         public void Draw() 
         {
-            map.Draw(0f);
+            map.Draw(.1f);
 
             foreach (Object2d obj in objects)
             {
-                obj.Draw(1f);
+                obj.Draw(.2f);
             }
         }
 
