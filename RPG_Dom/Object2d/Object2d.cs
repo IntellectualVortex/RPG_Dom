@@ -13,14 +13,13 @@ namespace RPG_Dom
     public class Object2d
     {
  
-        public Vector2 pos, currPos, dims, vel;
+        public Vector2 pos, dims, vel;
         public float rot;
         public Texture2D myObject;
 
 
-        public Object2d(string PATH, Vector2 CURRPOS, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0)
+        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0)
         {
-            currPos = CURRPOS;
             pos = POS;
             dims = DIMS;
             vel = VEL;
@@ -32,18 +31,19 @@ namespace RPG_Dom
 
 
 
-        public virtual void Update()
+        public virtual void Update(Camera camera)
         {
 
         }
 
         
-        public virtual void Draw(float layer)
+        public virtual void Draw(float layer, Camera camera)
         {
-
+            var rectangle = camera.worldSpaceToCameraSpace(this);
+            // (int)(pos.Y), (int)(dims.X), (int)(dims.Y)
             // Draw the selected model as a rectangle for hitbox and rotation measures
             Globals.spriteBatch.Draw(myObject,
-                new Rectangle((int)(pos.X), (int)(pos.Y), (int)(dims.X), (int)(dims.Y)),
+                rectangle,
                 null,
                 Color.White,
                 rot,

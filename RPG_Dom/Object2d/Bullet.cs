@@ -23,13 +23,12 @@ namespace RPG_Dom
     {
 
 
-        public Bullet(string PATH, Vector2 CURRPOS, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, CURRPOS, POS, DIMS, VEL, ROT) {
+        public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) {
             
         }
 
-        public override void Update()
+        public override void Update(Camera camera)
         {
-            vel = new Vector2((float)Math.Cos(rot), (float)Math.Sin(rot)) * 5f;
             pos += vel;
         }
     }

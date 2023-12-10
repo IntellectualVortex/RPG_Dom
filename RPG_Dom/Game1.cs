@@ -12,7 +12,7 @@ namespace RPG_Dom
         public Game1()
         {
 
-            Globals.graphicsDeviceManager = new GraphicsDeviceManager(this);
+            Globals.gDM = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -20,10 +20,10 @@ namespace RPG_Dom
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphicsDeviceManager.IsFullScreen = false;
-            Globals.graphicsDeviceManager.PreferredBackBufferWidth = 1920;
-            Globals.graphicsDeviceManager.PreferredBackBufferHeight = 1080;
-            Globals.graphicsDeviceManager.ApplyChanges();
+            Globals.gDM.IsFullScreen = false;
+            Globals.gDM.PreferredBackBufferWidth = 1920;
+            Globals.gDM.PreferredBackBufferHeight = 1080;
+            Globals.gDM.ApplyChanges();
             base.Initialize();
         }
 
@@ -51,7 +51,7 @@ namespace RPG_Dom
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap);
+            Globals.spriteBatch.Begin(SpriteSortMode.Deferred, null, null);
 
             world.Draw();
 

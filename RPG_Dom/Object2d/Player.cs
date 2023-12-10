@@ -1,7 +1,12 @@
 ﻿#region Includes
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
+
 #endregion
 
 namespace RPG_Dom
@@ -12,49 +17,73 @@ namespace RPG_Dom
         public float secondaryCooldownTimer = 0;
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
-        //Camera camera;
     
-        public Player(string PATH, Vector2 CURRPOS, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, CURRPOS, POS, DIMS, VEL, ROT) 
+        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
         {
         
         }
 
         // Override the update method of Object2d to perform below changes
-        public override void Update()
-        { 
-            
+        public override void Update(Camera camera)
+        {
+
             //camera = new Camera();
+            var rectangle = camera.worldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
-            var distance = new Vector2(mouse.X - pos.X, mouse.Y - pos.Y);
+            var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
 
             // Player controlled directional movement, align with fixed camera
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                currPos = new Vector2(currPos.X, currPos.Y -= 2);
+                pos = new Vector2(pos.X, pos.Y -= 2);
                 //camera.pos = new Vector2(pos.X, pos.Y += 2);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                currPos = new Vector2(currPos.X, currPos.Y += 2);
+                pos = new Vector2(pos.X, pos.Y += 2);
                 //camera.pos = new Vector2(pos.X, pos.Y -= 2);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                currPos = new Vector2(currPos.X -= 2, currPos.Y);
+                pos = new Vector2(pos.X -= 2, pos.Y);
                 //camera.pos = new Vector2(pos.X += 2, pos.Y);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                currPos = new Vector2(currPos.X += 2, currPos.Y);
+                pos = new Vector2(pos.X += 2, pos.Y);
                 //camera.pos = new Vector2(pos.X -= 2, pos.Y);
             }
         }
 
 
+        public virtual void Draw(float layer, Camera camera)
+        {
+            Globals.spriteBatch.Draw(myObject,
+                new Rectangle(
+                    Globals.gDM.PreferredBackBufferWidth / 2,
+                    Globals.gDM.PreferredBackBufferHeight / 2, 
+                    myObject.Bounds.Width,
+                    myObject.Bounds.Height),
+                    null,
+                    Color.White,
+                    rot,
+                    new Vector2(0, 0),
+                    new SpriteEffects(),
+                    layer);
+        }
+
+        public Bullet createBullet()
+        {
+            return new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(pos.X, pos.Y),
+                    new Vector2(50, 50),
+                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    rot);
+        }
     }
 
 
