@@ -51,9 +51,9 @@ namespace RPG_Dom
         }
 
 
-        public Vector2 worldSpaceToCameraSpace()
+        public Vector2 worldSpaceToCameraSpace(Object2d sprite)
         {
-            return new Vector2(camera.pos.X - map.pos.X, camera.pos.Y - map.pos.Y);
+            return new Vector2(camera.pos.X - sprite.pos.X, camera.pos.Y - sprite.pos.Y);
         }
 
 
@@ -116,7 +116,7 @@ namespace RPG_Dom
 
 
            
-            map.pos += worldSpaceToCameraSpace();
+            map.pos += worldSpaceToCameraSpace(map);
        
         }
         
