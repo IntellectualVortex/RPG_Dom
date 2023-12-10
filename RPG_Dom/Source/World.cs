@@ -24,6 +24,7 @@ namespace RPG_Dom
         public Bullet bullet;
         public MapTexture map; 
         public Camera camera;
+        public BarbarianEnemy barb;
 
 
         public World()
@@ -34,6 +35,13 @@ namespace RPG_Dom
                 new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth/2, 
                 Globals.graphicsDeviceManager.PreferredBackBufferHeight/2), 
                 new Vector2(100, 100), 
+                new Vector2(1, 0), 0f);
+
+            barb = new BarbarianEnemy("Assets\\run_1",
+                new Vector2(0, 0),
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2,
+                Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2),
+                new Vector2(100, 100),
                 new Vector2(1, 0), 0f);
 
             map = new MapTexture("Assets\\tex",
@@ -47,6 +55,7 @@ namespace RPG_Dom
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
             objects.Add(player);
+            objects.Add(barb); 
            
         }
 
@@ -54,6 +63,11 @@ namespace RPG_Dom
         public Vector2 worldSpaceToCameraSpace(Object2d sprite)
         {
             return new Vector2(camera.pos.X - sprite.pos.X, camera.pos.Y - sprite.pos.Y);
+        }
+
+        public void checkCollison()
+        {
+
         }
 
 
