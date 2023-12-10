@@ -88,13 +88,6 @@ namespace RPG_Dom
             }
 
 
-            for (var i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i].pos.X >= barb.pos.X + barb.dims.X || enemies[i].pos.Y >= barb.pos.Y + barb.dims.Y)
-                {
-                    enemies.Remove(enemies[i]);
-                }
-            }
 
 
             player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -145,7 +138,17 @@ namespace RPG_Dom
 
            
             map.pos += worldSpaceToCameraSpace(map, 0, 0);
-            barb.pos += worldSpaceToCameraSpace(barb, 200, 0);
+            barb.pos += worldSpaceToCameraSpace(barb, 400, 0);
+
+            // Collision check on enemy
+            for (var i = 0; i < objects.Count; i++)
+            {
+                if ((objects[i].pos.X >= barb.pos.X && objects[i].pos.X <= barb.pos.X + 50) && (objects[i].pos.Y >= barb.pos.Y && objects[i].pos.Y <= barb.pos.Y + 50))           
+              
+                {
+                    objects.Remove(objects[i]);
+                }
+            }
         }
         
         public void Draw()
