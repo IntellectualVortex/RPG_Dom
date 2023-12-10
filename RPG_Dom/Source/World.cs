@@ -20,6 +20,7 @@ namespace RPG_Dom
     public class World
     {
         List<Object2d> objects = new List<Object2d>();
+        List<Object2d> enemies = new List<Object2d>();
         public Player player;
         public Bullet bullet;
         public MapTexture map; 
@@ -39,9 +40,8 @@ namespace RPG_Dom
 
             barb = new BarbarianEnemy("Assets\\run_1",
                 new Vector2(0, 0),
-                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2,
-                Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2),
-                new Vector2(100, 100),
+                new Vector2(500, 500),
+                new Vector2(120, 120),
                 new Vector2(1, 0), 0f);
 
             map = new MapTexture("Assets\\tex",
@@ -55,14 +55,14 @@ namespace RPG_Dom
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
             objects.Add(player);
-            objects.Add(barb); 
+            enemies.Add(barb); 
            
         }
 
 
-        public Vector2 worldSpaceToCameraSpace(Object2d sprite)
+        public Vector2 worldSpaceToCameraSpace(Object2d sprite, float xOffset, float yOffset)
         {
-            return new Vector2(camera.pos.X - sprite.pos.X, camera.pos.Y - sprite.pos.Y);
+            return new Vector2(camera.pos.X - sprite.pos.X + xOffset, camera.pos.Y - sprite.pos.Y + yOffset);
         }
 
         public void checkCollison()
@@ -87,7 +87,16 @@ namespace RPG_Dom
                 }
             }
 
-            
+
+            for (var i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].pos.X >= barb.pos.X + barb.dims.X || enemies[i].pos.Y >= barb.pos.Y + barb.dims.Y)
+                {
+                    enemies.Remove(enemies[i]);
+                }
+            }
+
+
             player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             player.secondaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             MouseState mouse = Mouse.GetState();
@@ -123,15 +132,20 @@ namespace RPG_Dom
 
             }
 
+
             foreach (Object2d obj in objects)
             {
                 obj.Update();
             }
 
+            foreach (Object2d enemy in enemies)
+            {
+                enemy.Update();
+            }
 
            
-            map.pos += worldSpaceToCameraSpace(map);
-       
+            map.pos += worldSpaceToCameraSpace(map, 0, 0);
+            barb.pos += worldSpaceToCameraSpace(barb, 200, 0);
         }
         
         public void Draw()
@@ -141,6 +155,11 @@ namespace RPG_Dom
             foreach (Object2d obj in objects)
             {
                 obj.Draw(0f);
+            }
+
+            foreach (Object2d enemy in enemies)
+            {
+                enemy.Draw(0f);
             }
         }
 
