@@ -29,31 +29,45 @@ namespace RPG_Dom
         public World()
         {
             player = new Player("Assets\\Knight", 
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2,
+                Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2),
                 new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth/2, 
                 Globals.graphicsDeviceManager.PreferredBackBufferHeight/2), 
                 new Vector2(100, 100), 
                 new Vector2(1, 0), 0f);
 
             map = new MapTexture("Assets\\tex",
-                new Vector2(0, 0),
-                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth*2, Globals.graphicsDeviceManager.PreferredBackBufferHeight*2),
-                new Vector2(0, 0), 
-                0);
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2,
+                Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2),
+                new Vector2(Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2,
+                Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2),
+                new Vector2(10000, 10000),
+                new Vector2(1, 0), 0f);
 
-            camera = new Camera();
+            camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            objects.Add(player);    
+            objects.Add(player);
+           
         }
+
+
+        public Vector2 worldSpaceToCameraSpace()
+        {
+            return new Vector2(camera.pos.X - map.pos.X, camera.pos.Y - map.pos.Y);
+        }
+
 
         public void Update(GameTime gameTime)
         {
 
+            camera.pos = player.currPos;
+
             for (var i = 0; i < objects.Count; i++)
             {
-                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 800 ||
-                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 800 ||
-                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 500 ||
-                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 500)
+                if (objects[i].pos.X > Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 + 900 ||
+                    objects[i].pos.X < Globals.graphicsDeviceManager.PreferredBackBufferWidth / 2 - 900 ||
+                    objects[i].pos.Y > Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 + 600 ||
+                    objects[i].pos.Y < Globals.graphicsDeviceManager.PreferredBackBufferHeight / 2 - 600)
                 {
                     objects.Remove(objects[i]);
                 }
@@ -71,6 +85,7 @@ namespace RPG_Dom
                 {
                     objects.Add(new Bullet("Assets\\item8BIT_sword",
                     new Vector2(player.pos.X, player.pos.Y),
+                    new Vector2(player.pos.X, player.pos.Y),
                     new Vector2(20, 20),
                     new Vector2(0, 0), player.rot));
 
@@ -85,6 +100,7 @@ namespace RPG_Dom
                 {
                     objects.Add(new Bullet("Assets\\item8BIT_sword",
                     new Vector2(player.pos.X, player.pos.Y),
+                    new Vector2(player.pos.X, player.pos.Y),
                     new Vector2(50, 50),
                     new Vector2(0, 0), player.rot));
 
@@ -98,19 +114,19 @@ namespace RPG_Dom
                 obj.Update();
             }
 
-            map.pos.X = camera.pos.X * -1f;
-            map.pos.Y = camera.pos.Y * -1f;
-            map.Update();   
 
+           
+            map.pos += worldSpaceToCameraSpace();
+       
         }
         
-        public void Draw() 
+        public void Draw()
         {
-            map.Draw(.1f);
+            map.Draw(1f);
 
             foreach (Object2d obj in objects)
             {
-                obj.Draw(.2f);
+                obj.Draw(0f);
             }
         }
 

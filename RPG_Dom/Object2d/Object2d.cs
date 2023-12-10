@@ -13,13 +13,14 @@ namespace RPG_Dom
     public class Object2d
     {
  
-        public Vector2 pos, dims, vel;
+        public Vector2 pos, currPos, dims, vel;
         public float rot;
         public Texture2D myObject;
 
 
-        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0)
+        public Object2d(string PATH, Vector2 CURRPOS, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0)
         {
+            currPos = CURRPOS;
             pos = POS;
             dims = DIMS;
             vel = VEL;

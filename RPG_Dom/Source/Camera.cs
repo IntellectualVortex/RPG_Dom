@@ -22,8 +22,12 @@ namespace RPG_Dom
     {
         public Vector2 pos;
 
-
+        public Camera(Vector2 POS)
+        {
+            POS = pos;
         }
+
+    }
 
 }
 
