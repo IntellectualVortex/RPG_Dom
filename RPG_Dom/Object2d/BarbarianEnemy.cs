@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Drawing;
 #endregion
 
 namespace RPG_Dom
@@ -14,11 +15,11 @@ namespace RPG_Dom
         }
 
 
-        public virtual void Update(Player player, Camera camera)
+        public void MoveBarb(Player player)
         {
-            var rectangle = camera.worldSpaceToCameraSpace(this);
-            var distanceToPlayer = new Vector2(player.pos.X - rectangle.X, player.pos.Y - rectangle.Y);
-            rot = (float)Math.Atan2(distanceToPlayer.Y, distanceToPlayer.X);
+            var distance = new Vector2(player.pos.X - pos.X, player.pos.Y - pos.Y);
+            rot = (float)Math.Atan2(distance.Y, distance.X);
+            pos.X -= .5f;
         }
 
 

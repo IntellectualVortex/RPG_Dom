@@ -58,6 +58,13 @@ namespace RPG_Dom
 
             camera.pos = player.pos;
 
+
+            // Barbiarian enemy movement
+            if (barb != null)
+            {
+                barb.MoveBarb(player);
+            }
+
             for (var i = 0; i < objects.Count; i++)
             {
                 if (objects[i].pos.X > camera.pos.X + Globals.gDM.PreferredBackBufferWidth / 2 ||
