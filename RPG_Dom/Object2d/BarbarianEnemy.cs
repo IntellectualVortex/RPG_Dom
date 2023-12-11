@@ -12,5 +12,15 @@ namespace RPG_Dom
         {
 
         }
+
+
+        public virtual void Update(Player player, Camera camera)
+        {
+            var rectangle = camera.worldSpaceToCameraSpace(this);
+            var distanceToPlayer = new Vector2(player.pos.X - rectangle.X, player.pos.Y - rectangle.Y);
+            rot = (float)Math.Atan2(distanceToPlayer.Y, distanceToPlayer.X);
+        }
+
+
     }
 }

@@ -41,7 +41,7 @@ namespace RPG_Dom
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
-                new Vector2(10000, 10000),
+                new Vector2(0, 0),
                 new Vector2(1, 0), 0f);
             objects.Add(map);
 
@@ -115,6 +115,8 @@ namespace RPG_Dom
                 }
                 if (barb != null)
                 {
+
+                    // Fix incorrect hitbox calculations
                     if (
                         isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
                         || isInsideRectangle(objects[i].pos.X + objects[i].myObject.Width, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)

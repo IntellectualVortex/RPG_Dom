@@ -60,7 +60,7 @@ namespace RPG_Dom
         }
 
 
-        public virtual void Draw(float layer, Camera camera)
+        public override void Draw(float layer, Camera camera)
         {
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
