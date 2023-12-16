@@ -71,11 +71,11 @@ namespace RPG_Dom
                     null,
                     Color.White,
                     rot,
-                    new Vector2(0, 0),
+                    new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
                     new SpriteEffects(),
                     layer);
         }
-
+      
         public Bullet createBullet()
         {
             return new Bullet("Assets\\item8BIT_sword",

@@ -40,8 +40,6 @@ namespace RPG_Dom
         public virtual void Draw(float layer, Camera camera)
         {
             var rectangle = camera.worldSpaceToCameraSpace(this);
-            // (int)(pos.Y), (int)(dims.X), (int)(dims.Y)
-            // Draw the selected model as a rectangle for hitbox and rotation measures
             Globals.spriteBatch.Draw(myObject,
                 rectangle,
                 null,

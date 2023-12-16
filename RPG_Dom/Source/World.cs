@@ -31,7 +31,7 @@ namespace RPG_Dom
 
             player = new Player("Assets\\Knight", 
                 new Vector2(5000, 5000), 
-                new Vector2(100, 100), 
+                new Vector2(200, 200), 
                 new Vector2(1, 0), 0f);
 
             barb = new BarbarianEnemy("Assets\\run_1",
@@ -125,7 +125,7 @@ namespace RPG_Dom
 
                     // Fix incorrect hitbox calculations
                     if (
-                        isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X, 0)
+                        isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
                         || isInsideRectangle(objects[i].pos.X + objects[i].myObject.Width, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
                         || isInsideRectangle(objects[i].pos.X + objects[i].myObject.Width, objects[i].pos.Y + objects[i].myObject.Height, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
                         || isInsideRectangle(objects[i].pos.X, objects[i].pos.Y + objects[i].myObject.Height, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)

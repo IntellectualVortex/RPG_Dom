@@ -34,7 +34,6 @@ namespace RPG_Dom
             var y_1 = pos.Y - sprite.pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;
             return new Rectangle((int)x_1, (int)y_1, sprite.myObject.Width, sprite.myObject.Height);
         }
-
     }
 
 }
