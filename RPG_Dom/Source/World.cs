@@ -148,11 +148,7 @@ namespace RPG_Dom
 
         }
 
-        private Vector2 rotatePoint(float X, float Y, float rot)
-        {
-            return new Vector2((X * (float)Math.Cos(rot)) - (Y * (float)Math.Sin(rot)),
-                (X * (float)Math.Sin(rot)) + (Y * (float)Math.Cos(rot)));
-        }
+
 
         private bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)
         {

@@ -17,15 +17,16 @@ namespace RPG_Dom
         int health = 0;
         Rectangle healthRect;
         public Texture2D myObject;
+        
 
         public HealthBar(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
         {
            
         }  
 
-
         public void SetHealthBar(Object2d sprite)
         {
+
             health = 100;
             healthRect = new Rectangle((int)sprite.pos.X, (int)sprite.pos.Y, health, 20);
         }
