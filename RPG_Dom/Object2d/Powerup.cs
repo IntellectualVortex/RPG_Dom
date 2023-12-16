@@ -8,7 +8,7 @@ namespace RPG_Dom
 { 
     public class Powerup : Object2d
     {
-        public Powerup(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)  
+        public Powerup(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)  
         { 
         
         }

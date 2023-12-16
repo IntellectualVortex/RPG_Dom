@@ -23,7 +23,7 @@ namespace RPG_Dom
     {
 
 
-        public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) {
+        public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) {
             
         }
 

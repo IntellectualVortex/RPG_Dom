@@ -14,16 +14,17 @@ namespace RPG_Dom
     {
  
         public Vector2 pos, dims, vel;
-        public float rot;
+        public float rot, health;
         public Texture2D myObject;
 
 
-        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0)
+        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0, float HEALTH = 100)
         {
             pos = POS;
             dims = DIMS;
             vel = VEL;
             rot = ROT;
+            health = HEALTH;
 
             myObject = Globals.content.Load<Texture2D>(PATH);
          

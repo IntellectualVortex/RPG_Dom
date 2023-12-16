@@ -18,7 +18,7 @@ namespace RPG_Dom
         Rectangle healthRect;
         public Texture2D myObject;
 
-        public HealthBar(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
+        public HealthBar(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
         {
            
         }  

@@ -33,22 +33,22 @@ namespace RPG_Dom
             healthBar = new HealthBar("Assets\\hud_heartFull", 
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
-                new Vector2(1, 0), 0f);
+                new Vector2(1, 0), 0f, 100);
 
             player = new Player("Assets\\Knight", 
                 new Vector2(5000, 5000), 
                 new Vector2(100, 100), 
-                new Vector2(1, 0), 0f);
+                new Vector2(1, 0), 0f, 100);
 
             barb = new BarbarianEnemy("Assets\\run_1",
                 new Vector2(5500, 5000),
                 new Vector2(120, 120),
-                new Vector2(1, 0), 0f);
+                new Vector2(1, 0), 0f, 100);
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
                 new Vector2(0, 0),
-                new Vector2(1, 0), 0f);
+                new Vector2(1, 0), 0f, 100);
 
             objects.Add(map);
 
@@ -146,6 +146,12 @@ namespace RPG_Dom
                 }
             }
 
+        }
+
+        private Vector2 rotatePoint()
+        {
+            return new Vector2((barb.pos.X * (float)Math.Cos(barb.rot)) - (barb.pos.Y * (float)Math.Sin(barb.rot)),
+                (barb.pos.X * (float)Math.Sin(barb.rot)) + (barb.pos.Y * (float)Math.Cos(barb.rot)));
         }
 
         private bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)

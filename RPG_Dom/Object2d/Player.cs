@@ -18,7 +18,7 @@ namespace RPG_Dom
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
     
-        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
+        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
         {
         
         }
@@ -82,7 +82,7 @@ namespace RPG_Dom
                     new Vector2(pos.X, pos.Y),
                     new Vector2(50, 50),
                     new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
-                    rot);
+                    rot, 100);
         }
     }
 
