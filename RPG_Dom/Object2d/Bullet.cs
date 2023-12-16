@@ -6,30 +6,39 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 #endregion
 
 namespace RPG_Dom
 {
-    
+
     public class Bullet : Object2d
     {
 
 
-        public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) {
-            
+        public Bullet(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        {
+
         }
 
         public override void Update(Camera camera)
         {
             pos += vel;
         }
+
+
+        public override void Draw(float layer, Camera camera)
+        {
+            var rectangle = camera.worldSpaceToCameraSpaceScalable(this, (int)dims.X, (int)dims.Y);
+            Globals.spriteBatch.Draw(myObject,
+                rectangle,
+                null,
+                Color.White,
+                rot,
+                new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
+                new SpriteEffects(),
+                layer);
+        }
+
     }
 }

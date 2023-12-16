@@ -22,8 +22,8 @@ namespace RPG_Dom
         List<Object2d> playerObjects = new List<Object2d>();
         List<Object2d> enemies = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
+
         public Player player;
-        public Bullet bullet;
         public MapTexture map; 
         public Camera camera;
         public BarbarianEnemy barb;
@@ -67,7 +67,7 @@ namespace RPG_Dom
         {
 
             camera.pos = player.pos;
-            healthBar.pos = player.pos + new Vector2(0, 40);
+            healthBar.pos = player.pos + new Vector2(0, -70);
 
             // Barbiarian enemy movement
             if (barb != null)
@@ -107,7 +107,6 @@ namespace RPG_Dom
                 if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
                 {
                     playerObjects.Add(player.createBulletSecondary());
-
                     player.secondaryCooldownTimer = 2;
                 }
             }
@@ -118,7 +117,12 @@ namespace RPG_Dom
                 obj.Update(camera);
             }
 
-           
+            foreach (Object2d enemy in enemies)
+            {
+                enemy.Update(camera);
+            }
+
+
 
             // Collision check on enemy
 
@@ -162,8 +166,9 @@ namespace RPG_Dom
 
             foreach (Object2d obj in playerObjects)
             {
-                obj.Draw(0f, camera);
+                obj.Draw(0.5f, camera);
             }
+
         }
     }
 }

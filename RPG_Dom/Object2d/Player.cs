@@ -23,39 +23,51 @@ namespace RPG_Dom
         
         }
 
-        // Override the update method of Object2d to perform below changes
         public override void Update(Camera camera)
         {
-            //camera = new Camera();
             var rectangle = camera.worldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
 
-            // Player controlled directional movement, align with fixed camera
+
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 pos = new Vector2(pos.X, pos.Y -= 2);
-                //camera.pos = new Vector2(pos.X, pos.Y += 2);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 pos = new Vector2(pos.X, pos.Y += 2);
-                //camera.pos = new Vector2(pos.X, pos.Y -= 2);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 pos = new Vector2(pos.X -= 2, pos.Y);
-                //camera.pos = new Vector2(pos.X += 2, pos.Y);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 pos = new Vector2(pos.X += 2, pos.Y);
-                //camera.pos = new Vector2(pos.X -= 2, pos.Y);
             }
+        }
+      
+        public Bullet createBulletPrimary()
+        {
+            return new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(pos.X, pos.Y),
+                    new Vector2(myObject.Bounds.Width - 10, myObject.Bounds.Height - 10),
+                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    rot, 100);
+        }
+
+        public Bullet createBulletSecondary()
+        {
+            return new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(pos.X, pos.Y),
+                    new Vector2(myObject.Bounds.Width + 50, myObject.Bounds.Height + 50),
+                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    rot, 100);
         }
 
 
@@ -64,7 +76,7 @@ namespace RPG_Dom
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,
-                    Globals.gDM.PreferredBackBufferHeight / 2, 
+                    Globals.gDM.PreferredBackBufferHeight / 2,
                     (int)dims.X,
                     (int)dims.Y),
                     null,
@@ -74,24 +86,6 @@ namespace RPG_Dom
                     new SpriteEffects(),
                     layer);
 
-        }
-      
-        public Bullet createBulletPrimary()
-        {
-            return new Bullet("Assets\\item8BIT_sword",
-                    new Vector2(pos.X, pos.Y),
-                    new Vector2(50, 50),
-                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
-                    rot, 100);
-        }
-
-        public Bullet createBulletSecondary()
-        {
-            return new Bullet("Assets\\item8BIT_sword",
-                    new Vector2(pos.X, pos.Y),
-                    new Vector2(100, 100),
-                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
-                    rot, 100);
         }
     }
 
