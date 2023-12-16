@@ -26,7 +26,6 @@ namespace RPG_Dom
         // Override the update method of Object2d to perform below changes
         public override void Update(Camera camera)
         {
-
             //camera = new Camera();
             var rectangle = camera.worldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
@@ -74,6 +73,7 @@ namespace RPG_Dom
                     new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
                     new SpriteEffects(),
                     layer);
+
         }
       
         public Bullet createBullet()

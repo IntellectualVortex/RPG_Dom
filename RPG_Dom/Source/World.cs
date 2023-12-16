@@ -25,13 +25,19 @@ namespace RPG_Dom
         public MapTexture map; 
         public Camera camera;
         public BarbarianEnemy barb;
+        public HealthBar healthBar;
 
         public World()
         {
 
+            healthBar = new HealthBar("Assets\\hud_heartFull", 
+                new Vector2(5000, 5000),
+                new Vector2(100, 100),
+                new Vector2(1, 0), 0f);
+
             player = new Player("Assets\\Knight", 
                 new Vector2(5000, 5000), 
-                new Vector2(200, 200), 
+                new Vector2(100, 100), 
                 new Vector2(1, 0), 0f);
 
             barb = new BarbarianEnemy("Assets\\run_1",
@@ -43,10 +49,12 @@ namespace RPG_Dom
                 new Vector2(5000, 5000),
                 new Vector2(0, 0),
                 new Vector2(1, 0), 0f);
+
             objects.Add(map);
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
+            objects.Add(healthBar);
             objects.Add(player);
             objects.Add(barb); 
            
@@ -57,7 +65,7 @@ namespace RPG_Dom
         {
 
             camera.pos = player.pos;
-
+            healthBar.pos = player.pos + new Vector2(0, -80);
 
             // Barbiarian enemy movement
             if (barb != null)
@@ -125,10 +133,10 @@ namespace RPG_Dom
 
                     // Fix incorrect hitbox calculations
                     if (
-                        isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
-                        || isInsideRectangle(objects[i].pos.X + objects[i].myObject.Width, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
-                        || isInsideRectangle(objects[i].pos.X + objects[i].myObject.Width, objects[i].pos.Y + objects[i].myObject.Height, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
-                        || isInsideRectangle(objects[i].pos.X, objects[i].pos.Y + objects[i].myObject.Height, barb.pos.X, barb.pos.Y, barb.pos.X + barb.myObject.Width, barb.pos.Y + barb.myObject.Height)
+                        isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(objects[i].pos.X + (objects[i].myObject.Width / 2), objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(objects[i].pos.X + (objects[i].myObject.Width / 2), objects[i].pos.Y + (objects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(objects[i].pos.X, objects[i].pos.Y + (objects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
                         )
                     {
                         objects.Remove(objects[i]);
