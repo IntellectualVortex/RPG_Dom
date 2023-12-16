@@ -19,7 +19,9 @@ namespace RPG_Dom
 {
     public class World
     {
-        List<Object2d> objects = new List<Object2d>();
+        List<Object2d> playerObjects = new List<Object2d>();
+        List<Object2d> enemies = new List<Object2d>();
+        List<Object2d> worldObjects = new List<Object2d>();
         public Player player;
         public Bullet bullet;
         public MapTexture map; 
@@ -50,13 +52,13 @@ namespace RPG_Dom
                 new Vector2(0, 0),
                 new Vector2(1, 0), 0f, 100);
 
-            objects.Add(map);
+            
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            objects.Add(healthBar);
-            objects.Add(player);
-            objects.Add(barb); 
+            playerObjects.Add(healthBar);
+            playerObjects.Add(player);
+            enemies.Add(barb); 
            
         }
 
@@ -65,7 +67,7 @@ namespace RPG_Dom
         {
 
             camera.pos = player.pos;
-            healthBar.pos = player.pos + new Vector2(0, 50);
+            healthBar.pos = player.pos + new Vector2(0, 40);
 
             // Barbiarian enemy movement
             if (barb != null)
@@ -73,18 +75,16 @@ namespace RPG_Dom
                 barb.MoveBarb(player);
             }
 
-            for (var i = 0; i < objects.Count; i++)
+            for (var i = 0; i < playerObjects.Count; i++)
             {
-                if (objects[i].pos.X > camera.pos.X + Globals.gDM.PreferredBackBufferWidth / 2 ||
-                    objects[i].pos.X < Globals.gDM.PreferredBackBufferWidth / 2 - camera.pos.X ||
-                    objects[i].pos.Y > Globals.gDM.PreferredBackBufferHeight / 2 + camera.pos.Y ||
-                    objects[i].pos.Y < Globals.gDM.PreferredBackBufferHeight / 2 - camera.pos.Y)
+                if (playerObjects[i].pos.X > camera.pos.X + Globals.gDM.PreferredBackBufferWidth / 2 ||
+                    playerObjects[i].pos.X < Globals.gDM.PreferredBackBufferWidth / 2 - camera.pos.X ||
+                    playerObjects[i].pos.Y > Globals.gDM.PreferredBackBufferHeight / 2 + camera.pos.Y ||
+                    playerObjects[i].pos.Y < Globals.gDM.PreferredBackBufferHeight / 2 - camera.pos.Y)
                 {
-                    objects.Remove(objects[i]);
+                    playerObjects.Remove(playerObjects[i]);
                 }
             }
-
-
 
 
             player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -96,7 +96,7 @@ namespace RPG_Dom
 
                 if (player.primaryCooldownTimer >= player.playerPrimaryCooldownLength)
                 {
-                    objects.Add(player.createBullet());
+                    playerObjects.Add(player.createBulletPrimary());
 
                     player.primaryCooldownTimer = 0;
                 }
@@ -106,14 +106,14 @@ namespace RPG_Dom
             {
                 if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
                 {
-                    objects.Add(player.createBullet());
+                    playerObjects.Add(player.createBulletSecondary());
 
-                    player.secondaryCooldownTimer = 0;
+                    player.secondaryCooldownTimer = 2;
                 }
             }
 
 
-            foreach (Object2d obj in objects)
+            foreach (Object2d obj in playerObjects)
             {
                 obj.Update(camera);
             }
@@ -122,25 +122,19 @@ namespace RPG_Dom
 
             // Collision check on enemy
 
-            for (var i = 0; i < objects.Count; i++)
+            for (var i = 0; i < playerObjects.Count; i++)
             {
-                if (objects[i].GetType() == typeof(BarbarianEnemy))
-                {
-                    continue;
-                }
                 if (barb != null)
-                {
-
-                    // Fix incorrect hitbox calculations
+                { 
                     if (
-                        isInsideRectangle(objects[i].pos.X, objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(objects[i].pos.X + (objects[i].myObject.Width / 2), objects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(objects[i].pos.X + (objects[i].myObject.Width / 2), objects[i].pos.Y + (objects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(objects[i].pos.X, objects[i].pos.Y + (objects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        isInsideRectangle(playerObjects[i].pos.X, playerObjects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        || isInsideRectangle(playerObjects[i].pos.X, playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
                         )
                     {
-                        objects.Remove(objects[i]);
-                        objects.Remove(barb); 
+                        playerObjects.Remove(playerObjects[i]);
+                        enemies.Remove(barb); 
                         barb = null;
                     }
                 }
@@ -149,20 +143,26 @@ namespace RPG_Dom
         }
 
 
-
+        // Check whether sprite rectangle objects intersect with each other
         private bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)
         {
             return r_x_1 <= x && x <= r_x_2 && r_y_1 <= y && y <= r_y_2;
         }
         
+
+
         public void Draw()
         {
+            map.Draw(0.1f, camera);
 
-            var i = 0f;
-            foreach (Object2d obj in objects)
+            foreach (Object2d enemy in enemies)
             {
-                obj.Draw(i, camera);
-                i += 0.001f;
+                enemy.Draw(0f, camera);
+            }
+
+            foreach (Object2d obj in playerObjects)
+            {
+                obj.Draw(0f, camera);
             }
         }
     }

@@ -76,11 +76,20 @@ namespace RPG_Dom
 
         }
       
-        public Bullet createBullet()
+        public Bullet createBulletPrimary()
         {
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
                     new Vector2(50, 50),
+                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    rot, 100);
+        }
+
+        public Bullet createBulletSecondary()
+        {
+            return new Bullet("Assets\\item8BIT_sword",
+                    new Vector2(pos.X, pos.Y),
+                    new Vector2(100, 100),
                     new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
                     rot, 100);
         }
