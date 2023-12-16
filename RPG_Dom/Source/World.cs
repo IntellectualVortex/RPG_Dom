@@ -65,7 +65,7 @@ namespace RPG_Dom
         {
 
             camera.pos = player.pos;
-            healthBar.pos = player.pos + new Vector2(0, -80);
+            healthBar.pos = player.pos + new Vector2(0, 50);
 
             // Barbiarian enemy movement
             if (barb != null)
@@ -148,7 +148,7 @@ namespace RPG_Dom
 
         }
 
-        private Vector2 rotatePoint()
+        private Vector2 rotatePoint(float X, float Y)
         {
             return new Vector2((barb.pos.X * (float)Math.Cos(barb.rot)) - (barb.pos.Y * (float)Math.Sin(barb.rot)),
                 (barb.pos.X * (float)Math.Sin(barb.rot)) + (barb.pos.Y * (float)Math.Cos(barb.rot)));
