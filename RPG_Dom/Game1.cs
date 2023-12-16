@@ -51,7 +51,7 @@ namespace RPG_Dom
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            Globals.spriteBatch.Begin(SpriteSortMode.Deferred, null, null);
+            Globals.spriteBatch.Begin(SpriteSortMode.Deferred, blendState:BlendState.AlphaBlend, null);
 
             world.Draw();
 

@@ -66,8 +66,8 @@ namespace RPG_Dom
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,
                     Globals.gDM.PreferredBackBufferHeight / 2, 
-                    myObject.Bounds.Width,
-                    myObject.Bounds.Height),
+                    (int)dims.X,
+                    (int)dims.Y),
                     null,
                     Color.White,
                     rot,
