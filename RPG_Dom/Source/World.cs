@@ -68,6 +68,7 @@ namespace RPG_Dom
 
             camera.pos = player.pos;
             healthBar.pos = player.pos + new Vector2(0, -70);
+            
 
             // Barbiarian enemy movement
             if (barb != null)
@@ -119,6 +120,7 @@ namespace RPG_Dom
 
             foreach (Object2d enemy in enemies)
             {
+                
                 enemy.Update(camera);
             }
 
