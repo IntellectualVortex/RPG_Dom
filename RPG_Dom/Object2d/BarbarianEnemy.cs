@@ -11,6 +11,9 @@ namespace RPG_Dom
     {
         Player player;
         int speedCoefficient = 1;
+
+        public string name;
+
         public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
         {
             player = PLAYER;

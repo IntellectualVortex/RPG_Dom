@@ -1,16 +1,42 @@
-﻿#region ncludes
+﻿#region Includes
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
+
 #endregion
 
 namespace RPG_Dom 
 { 
-    public class Powerup : Object2d
+    public class PowerUp : Object2d
     {
-        public Powerup(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)  
+
+        public PowerUp(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)  
         { 
         
+        }
+
+        
+/*        public Object2d CreateSpeedPowerUp() 
+        {
+
+        }  */
+
+
+        public override void Draw(float layer, Camera camera)
+        {
+            var rectangle = camera.worldSpaceToCameraSpace(this);
+            Globals.spriteBatch.Draw(myObject,
+                rectangle,
+                null,
+                Color.White,
+                rot,
+                new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
+                new SpriteEffects(),
+                layer);
         }
     }
 }

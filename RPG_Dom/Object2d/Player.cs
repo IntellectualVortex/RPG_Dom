@@ -117,6 +117,7 @@ namespace RPG_Dom
             {
                 flipDirection = SpriteEffects.FlipVertically;
             }
+            
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,

@@ -1,5 +1,5 @@
 ﻿#region Includes
-
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -13,26 +13,35 @@ using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Runtime.ConstrainedExecution;
 #endregion
 
 namespace RPG_Dom
 {
     public class World
     {
+        private int numOfBarbs = 5;
         List<Object2d> playerObjects = new List<Object2d>();
         List<Object2d> enemies = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
+        List<Object2d> consumables = new List<Object2d>();
+        List<Vector2> enemiesDeathLoc = new List<Vector2>();
+
 
         public Player player;
         public MapTexture map; 
         public Camera camera;
-        public BarbarianEnemy barb;
+/*        public BarbarianEnemy barb;
+        public BarbarianEnemy barb2;*/
         public HealthBar healthBar;
+        public PowerUp powerup;
 
         public World()
         {
 
-            healthBar = new HealthBar("Assets\\hud_heartFull", 
+
+
+            healthBar = new HealthBar("Assets\\element_red_rectangle", 
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
                 new Vector2(1, 0), 0f, 100);
@@ -42,11 +51,17 @@ namespace RPG_Dom
                 new Vector2(100, 100), 
                 new Vector2(0, 0), 0f, 100);
 
-            barb = new BarbarianEnemy(player,
-                "Assets\\barb",
-                new Vector2(5500, 5000),
-                new Vector2(120, 120),
-                new Vector2(1, 0), 0f, 100);
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + (100), 5000 + (100)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + (300), 5000 + (300)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
@@ -59,7 +74,8 @@ namespace RPG_Dom
 
             playerObjects.Add(healthBar);
             playerObjects.Add(player);
-            enemies.Add(barb); 
+            
+
            
         }
 
@@ -118,40 +134,59 @@ namespace RPG_Dom
                 enemy.Update(camera);
             }
 
-
+/*            foreach (Object2d obj in consumables)
+            {
+                obj.Update(camera);
+            }*/
 
             // Collision check on enemy
 
             for (var i = 0; i < playerObjects.Count; i++)
             {
-                if (barb != null)
-                { 
-                    if (
-                        isInsideRectangle( // BULLET TOP LEFT
-                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
-                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
-                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET TOP RIGHT
-                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2), 
-                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
-                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET BOT RIGHT
-                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
-                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET BOT LEFT
-                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
-                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        )
+                for (var j = 0; j < enemies.Count; j++)
+                {
+                    if (enemies[j] != null)
                     {
-                        playerObjects.Remove(playerObjects[i]);
-                        enemies.Remove(barb); 
-                        barb = null;
+                        if (
+                            isInsideRectangle( // BULLET TOP LEFT
+                                playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET TOP RIGHT
+                                playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET BOT RIGHT
+                                playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET BOT LEFT
+                                playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            )
+                        {
+
+                            playerObjects.Remove(playerObjects[i]);
+                            //enemies.Remove(enemies[j]);
+                            enemies[j] = null;
+
+                            //enemiesDeathLoc.Add(enemies[j].pos);
+
+                            /*
+                                                        powerup = new PowerUp("Assets\\chest_open_3",
+                                                        new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
+                                                        new Vector2(100,100),
+                                                        new Vector2(0, 0),
+                                                        0f, 100);*/
+
+                            //consumables.Add(powerup);
+
+                        }
                     }
                 }
             }
@@ -171,6 +206,7 @@ namespace RPG_Dom
         {
             map.Draw(0.1f, camera);
 
+
             foreach (Object2d enemy in enemies)
             {
                 enemy.Draw(0f, camera);
@@ -181,6 +217,10 @@ namespace RPG_Dom
                 obj.Draw(0.5f, camera);
             }
 
+/*            foreach (Object2d obj in consumables)
+            {
+                obj.Draw(0.5f, camera);
+            }*/
         }
     }
 }
