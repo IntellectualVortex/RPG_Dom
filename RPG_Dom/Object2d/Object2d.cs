@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-
+using System;
 #endregion
 
 namespace RPG_Dom
@@ -30,8 +30,6 @@ namespace RPG_Dom
          
         }
 
-
-
         public virtual void Update(Camera camera)
         {
             pos += vel;
@@ -40,6 +38,18 @@ namespace RPG_Dom
         
         public virtual void Draw(float layer, Camera camera)
         {
+            // enum
+            SpriteEffects flipDirection;
+
+            if (Math.Abs(rot) <= Math.PI/2)
+            {
+                flipDirection = SpriteEffects.None;
+
+            }
+            else
+            {
+                flipDirection = SpriteEffects.FlipVertically;
+            }
             var rectangle = camera.worldSpaceToCameraSpace(this);
             Globals.spriteBatch.Draw(myObject,
                 rectangle,
@@ -47,7 +57,7 @@ namespace RPG_Dom
                 Color.White,
                 rot,
                 new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
-                new SpriteEffects(),
+                flipDirection,
                 layer);
         }
     }  

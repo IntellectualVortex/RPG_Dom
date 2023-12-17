@@ -27,20 +27,13 @@ namespace RPG_Dom
             POS = pos;
         }
 
-
         public Rectangle worldSpaceToCameraSpace(Object2d sprite)
         {
-            var x_1 = pos.X - sprite.pos.X + Globals.gDM.PreferredBackBufferWidth / 2;
-            var y_1 = pos.Y - sprite.pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;
-            return new Rectangle((int)x_1, (int)y_1, sprite.myObject.Width, sprite.myObject.Height);
+            var x_1 = sprite.pos.X - pos.X + Globals.gDM.PreferredBackBufferWidth / 2;
+            var y_1 = sprite.pos.Y - pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;
+            return new Rectangle((int)x_1, (int)y_1, (int)sprite.dims.X, (int)sprite.dims.Y);
         }
 
-        public Rectangle worldSpaceToCameraSpaceScalable(Object2d sprite, int height, int width)
-        { 
-            var x_1 = pos.X - sprite.pos.X + Globals.gDM.PreferredBackBufferWidth / 2;
-            var y_1 = pos.Y - sprite.pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;
-            return new Rectangle((int)x_1, (int)y_1, width, height);
-        }
     }
 
 }

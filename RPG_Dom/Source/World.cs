@@ -40,16 +40,17 @@ namespace RPG_Dom
             player = new Player("Assets\\Knight", 
                 new Vector2(5000, 5000), 
                 new Vector2(100, 100), 
-                new Vector2(1, 0), 0f, 100);
+                new Vector2(0, 0), 0f, 100);
 
-            barb = new BarbarianEnemy("Assets\\run_1",
+            barb = new BarbarianEnemy(player,
+                "Assets\\barb",
                 new Vector2(5500, 5000),
                 new Vector2(120, 120),
                 new Vector2(1, 0), 0f, 100);
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
-                new Vector2(0, 0),
+                new Vector2(5000, 5000),
                 new Vector2(1, 0), 0f, 100);
 
             
@@ -65,10 +66,8 @@ namespace RPG_Dom
 
         public void Update(GameTime gameTime)
         {
-
             camera.pos = player.pos;
             healthBar.pos = player.pos + new Vector2(0, -70);
-            
 
 
             for (var i = 0; i < playerObjects.Count; i++)
@@ -128,10 +127,26 @@ namespace RPG_Dom
                 if (barb != null)
                 { 
                     if (
-                        isInsideRectangle(playerObjects[i].pos.X, playerObjects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y, barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
-                        || isInsideRectangle(playerObjects[i].pos.X, playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2), barb.pos.X, barb.pos.Y, barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2))
+                        isInsideRectangle( // BULLET TOP LEFT
+                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
+                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
+                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
+                            )
+                        || isInsideRectangle( // BULLET TOP RIGHT
+                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2), 
+                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
+                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
+                            )
+                        || isInsideRectangle( // BULLET BOT RIGHT
+                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
+                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
+                            )
+                        || isInsideRectangle( // BULLET BOT LEFT
+                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                            barb.pos.X - (barb.myObject.Width / 2), barb.pos.Y - (barb.myObject.Height / 2), // BARB TOP LEFT
+                            barb.pos.X + (barb.myObject.Width / 2), barb.pos.Y + (barb.myObject.Height / 2) // BARB BOT RIGHT
+                            )
                         )
                     {
                         playerObjects.Remove(playerObjects[i]);

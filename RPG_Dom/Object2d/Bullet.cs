@@ -29,7 +29,7 @@ namespace RPG_Dom
 
         public override void Draw(float layer, Camera camera)
         {
-            var rectangle = camera.worldSpaceToCameraSpaceScalable(this, (int)dims.X, (int)dims.Y);
+            var rectangle = camera.worldSpaceToCameraSpace(this);
             Globals.spriteBatch.Draw(myObject,
                 rectangle,
                 null,

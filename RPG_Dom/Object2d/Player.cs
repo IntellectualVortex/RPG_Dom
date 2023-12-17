@@ -17,8 +17,9 @@ namespace RPG_Dom
         public float secondaryCooldownTimer = 0;
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
-        private int speed = 2;
-    
+        private int speedCoefficient = 5;
+
+
         public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
         {
         
@@ -26,38 +27,52 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
+            updateRotation(camera);
+            updateVelocity();
+            base.Update(camera);
+        }
 
+        private void updateRotation(Camera camera)
+        {
             var rectangle = camera.worldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
+        }
 
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                vel = new Vector2(0, -1* speed);
+        private void updateVelocity()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.S)) {
+                vel.Y = 0;
             }
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                vel = new Vector2(0, speed);
+            else if (Keyboard.GetState().IsKeyDown(Keys.W)) {
+                vel.Y = -1 * speedCoefficient;
             }
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                vel = new Vector2(-1* speed, 0);
-            }
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                vel = new Vector2(speed, 0);
+            else if (Keyboard.GetState().IsKeyDown(Keys.S)) {
+                vel.Y = speedCoefficient;
             }
             else
             {
-                vel = new Vector2(0, 0);
+                vel.Y = 0;
             }
 
-            base.Update(camera);
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                vel.X = 0;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                vel.X = speedCoefficient;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                vel.X = -1 * speedCoefficient;
+            }
+            else
+            {
+                vel.X = 0;
+            }
+
         }
       
         public Bullet createBulletPrimary()
@@ -65,7 +80,7 @@ namespace RPG_Dom
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width - 10, myObject.Bounds.Height - 10),
-                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    new Vector2((float)Math.Cos(rot),(float)Math.Sin(rot)) * 10f,
                     rot, 100);
         }
 
@@ -74,7 +89,7 @@ namespace RPG_Dom
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width + 50, myObject.Bounds.Height + 50),
-                    new Vector2(-1 * (float)Math.Cos(rot), -1 * (float)Math.Sin(rot)) * 10f,
+                    new Vector2((float)Math.Cos(rot), (float)Math.Sin(rot)) * 10f,
                     rot, 100);
         }
 
