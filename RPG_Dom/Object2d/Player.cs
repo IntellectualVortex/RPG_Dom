@@ -106,6 +106,17 @@ namespace RPG_Dom
 
         public override void Draw(float layer, Camera camera)
         {
+            SpriteEffects flipDirection;
+
+            if (Math.Abs(rot) <= Math.PI / 2)
+            {
+                flipDirection = SpriteEffects.None;
+
+            }
+            else
+            {
+                flipDirection = SpriteEffects.FlipVertically;
+            }
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,
@@ -116,7 +127,7 @@ namespace RPG_Dom
                     Color.White,
                     rot,
                     new Vector2(myObject.Bounds.Width / 2, myObject.Bounds.Height / 2),
-                    new SpriteEffects(),
+                    flipDirection,
                     layer);
 
         }
