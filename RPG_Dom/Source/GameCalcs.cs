@@ -28,12 +28,38 @@ namespace RPG_Dom
             return new Vector2((X * (float)Math.Cos(rot)) - (Y * (float)Math.Sin(rot)),
                 (X * (float)Math.Sin(rot)) + (Y * (float)Math.Cos(rot)));
         }
-/*
-        public static float critChance()
+
+        public static void MoveToPlayer(int X, int Y, int X2, int Y2)
         {
-            if 
-        }*/
+            // Calculate the distance between the enemy and the player
+            int distanceX = X - X2;
+            int distanceY = Y - Y2;
 
+            // Move the enemy towards the player
+            if (distanceX > 0)
+            {
+                X++;
+            }
+            else if (distanceX < 0)
+            {
+                X--;
+            }
 
+            if (distanceY > 0)
+            {
+                Y++;
+            }
+            else if (distanceY < 0)
+            {
+                Y2--;
+            }
+
+            /*
+                    public static float critChance()
+                    {
+                        if 
+                    }*/
+
+        }
     }
 }

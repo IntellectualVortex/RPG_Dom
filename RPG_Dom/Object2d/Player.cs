@@ -17,6 +17,7 @@ namespace RPG_Dom
         public float secondaryCooldownTimer = 0;
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
+        private int speed = 2;
     
         public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
         {
@@ -25,6 +26,7 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
+
             var rectangle = camera.worldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
@@ -33,23 +35,29 @@ namespace RPG_Dom
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                pos = new Vector2(pos.X, pos.Y -= 2);
+                vel = new Vector2(0, -1* speed);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            else if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                pos = new Vector2(pos.X, pos.Y += 2);
+                vel = new Vector2(0, speed);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                pos = new Vector2(pos.X -= 2, pos.Y);
+                vel = new Vector2(-1* speed, 0);
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                pos = new Vector2(pos.X += 2, pos.Y);
+                vel = new Vector2(speed, 0);
             }
+            else
+            {
+                vel = new Vector2(0, 0);
+            }
+
+            base.Update(camera);
         }
       
         public Bullet createBulletPrimary()

@@ -70,11 +70,6 @@ namespace RPG_Dom
             healthBar.pos = player.pos + new Vector2(0, -70);
             
 
-            // Barbiarian enemy movement
-            if (barb != null)
-            {
-                barb.MoveBarb(player);
-            }
 
             for (var i = 0; i < playerObjects.Count; i++)
             {

@@ -34,7 +34,7 @@ namespace RPG_Dom
 
         public virtual void Update(Camera camera)
         {
-
+            pos += vel;
         }
 
         

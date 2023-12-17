@@ -19,9 +19,8 @@ namespace RPG_Dom
         {
             var distance = new Vector2(player.pos.X - pos.X, player.pos.Y - pos.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
-            pos -= vel;
+            //base.Update();
         }
-
 
     }
 }
