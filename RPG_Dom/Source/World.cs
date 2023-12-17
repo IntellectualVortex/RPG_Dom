@@ -21,6 +21,8 @@ namespace RPG_Dom
     public class World
     {
         private int numOfBarbs = 10;
+        Random rnd = new Random();
+
         List<Object2d> playerObjects = new List<Object2d>();
         List<Object2d> enemies = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
@@ -30,8 +32,6 @@ namespace RPG_Dom
         public Player player;
         public MapTexture map; 
         public Camera camera;
-/*        public BarbarianEnemy barb;
-        public BarbarianEnemy barb2;*/
         public HealthBar healthBar;
         public PowerUp powerup;
 
@@ -52,34 +52,74 @@ namespace RPG_Dom
                 new Vector2(0, 0), 0f, 100);
 
 
-/*          // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-            for (int i = 0; i < numOfBarbs; i++)
-            {
-                enemies.Add(new BarbarianEnemy(player,
+            /*          // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                        for (int i = 0; i < numOfBarbs; i++)
+                        {
+                            enemies.Add(new BarbarianEnemy(player,
+                                "Assets\\barb",
+                                new Vector2(5500 + (100), 5000 + (100)),
+                                new Vector2(120, 120),
+                                new Vector2(1, 0), 0f, 100));
+                        }*/
+
+
+            // EXPAND BELOW
+            #region BarbCreation
+            enemies.Add(new BarbarianEnemy(player,
                     "Assets\\barb",
-                    new Vector2(5500 + (100), 5000 + (100)),
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                     new Vector2(120, 120),
                     new Vector2(1, 0), 0f, 100));
-            }*/
 
             enemies.Add(new BarbarianEnemy(player,
                     "Assets\\barb",
-                    new Vector2(5500 + (100), 5000 + (100)),
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                     new Vector2(120, 120),
                     new Vector2(1, 0), 0f, 100));
 
             enemies.Add(new BarbarianEnemy(player,
                     "Assets\\barb",
-                    new Vector2(5500 + (300), 5000 + (300)),
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                     new Vector2(120, 120),
                     new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+            #endregion
+
 
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
                 new Vector2(5000, 5000),
                 new Vector2(1, 0), 0f, 100);
 
-            
+
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
@@ -96,7 +136,7 @@ namespace RPG_Dom
             camera.pos = player.pos;
             healthBar.pos = player.pos + new Vector2(0, -70);
 
-
+            // Remove bullets if reach end of screen space
             for (var i = 0; i < playerObjects.Count; i++)
             {
                 if (playerObjects[i].pos.X > camera.pos.X + Globals.gDM.PreferredBackBufferWidth / 2 ||
@@ -108,11 +148,13 @@ namespace RPG_Dom
                 }
             }
 
-
+            // Player primary and secondary attack cooldowns
             player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             player.secondaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             MouseState mouse = Mouse.GetState();
             
+
+            // Instantiating Bullet isntances on left/right mouse clicks
             if (mouse.LeftButton == ButtonState.Pressed)
             {
 
@@ -150,8 +192,8 @@ namespace RPG_Dom
                 obj.Update(camera);
             }
 
-            // Collision check on enemy
 
+            // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
             for (var i = 0; i < playerObjects.Count; i++)
             {
                 for (var j = 0; j < enemies.Count; j++)
