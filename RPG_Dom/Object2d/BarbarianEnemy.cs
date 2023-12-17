@@ -24,6 +24,7 @@ namespace RPG_Dom
             base.Update(camera);
         }
 
+        // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
         private void updateVelocity(Camera camera)
         {
             vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y) / GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y).Length() * speedCoefficient;

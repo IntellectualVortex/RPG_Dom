@@ -18,6 +18,7 @@ namespace RPG_Dom
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
         private int speedCoefficient = 5;
+        private int speedMult = 5;
 
 
         public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
@@ -40,9 +41,12 @@ namespace RPG_Dom
             rot = (float)Math.Atan2(distance.Y, distance.X);
         }
 
+
+        // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
         private void updateVelocity()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.S)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.S)) 
+            {
                 vel.Y = 0;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.W)) {
@@ -73,6 +77,12 @@ namespace RPG_Dom
                 vel.X = 0;
             }
 
+            if (vel != Vector2.Zero)
+            {
+                vel.Normalize();
+                vel.X *= speedMult;
+                vel.Y *= speedMult;
+            }
         }
       
         public Bullet createBulletPrimary()

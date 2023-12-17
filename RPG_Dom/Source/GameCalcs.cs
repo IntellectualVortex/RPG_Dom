@@ -29,6 +29,8 @@ namespace RPG_Dom
                 (X * (float)Math.Sin(rot)) + (Y * (float)Math.Cos(rot)));
         }
 
+
+
         public static Vector2 MoveToPlayer(int X, int Y, int X2, int Y2)
         {
             return new Vector2(X - X2, Y - Y2);
