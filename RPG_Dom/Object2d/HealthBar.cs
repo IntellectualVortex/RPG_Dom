@@ -35,9 +35,9 @@ namespace RPG_Dom
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,
-                    Globals.gDM.PreferredBackBufferHeight / 2,
-                    (int)dims.X,
-                    (int)dims.Y),
+                    Globals.gDM.PreferredBackBufferHeight / 2 - 40,
+                    (int)dims.X + 20,
+                    (int)dims.Y / 5),
                     null,
                     Color.White,
                     rot,

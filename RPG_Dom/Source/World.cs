@@ -20,12 +20,11 @@ namespace RPG_Dom
 {
     public class World
     {
-        private int numOfBarbs = 5;
+        private int numOfBarbs = 10;
         List<Object2d> playerObjects = new List<Object2d>();
         List<Object2d> enemies = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
         List<Object2d> consumables = new List<Object2d>();
-        List<Vector2> enemiesDeathLoc = new List<Vector2>();
 
 
         public Player player;
@@ -35,6 +34,7 @@ namespace RPG_Dom
         public BarbarianEnemy barb2;*/
         public HealthBar healthBar;
         public PowerUp powerup;
+
 
         public World()
         {
@@ -50,6 +50,17 @@ namespace RPG_Dom
                 new Vector2(5000, 5000), 
                 new Vector2(100, 100), 
                 new Vector2(0, 0), 0f, 100);
+
+
+/*          // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            for (int i = 0; i < numOfBarbs; i++)
+            {
+                enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + (100), 5000 + (100)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+            }*/
 
             enemies.Add(new BarbarianEnemy(player,
                     "Assets\\barb",
@@ -134,10 +145,10 @@ namespace RPG_Dom
                 enemy.Update(camera);
             }
 
-/*            foreach (Object2d obj in consumables)
+            foreach (Object2d obj in consumables)
             {
                 obj.Update(camera);
-            }*/
+            }
 
             // Collision check on enemy
 
@@ -171,20 +182,19 @@ namespace RPG_Dom
                             )
                         {
 
-                            playerObjects.Remove(playerObjects[i]);
-                            //enemies.Remove(enemies[j]);
-                            enemies[j] = null;
 
                             //enemiesDeathLoc.Add(enemies[j].pos);
 
-                            /*
-                                                        powerup = new PowerUp("Assets\\chest_open_3",
-                                                        new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
-                                                        new Vector2(100,100),
-                                                        new Vector2(0, 0),
-                                                        0f, 100);*/
 
-                            //consumables.Add(powerup);
+                            powerup = new PowerUp("Assets\\chest_open_3",
+                            new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
+                            new Vector2(100, 100),
+                            new Vector2(0, 0),
+                            0f, 100);
+
+                            playerObjects.Remove(playerObjects[i]);
+                            enemies.Remove(enemies[j]);
+                            consumables.Add(powerup);
 
                         }
                     }
@@ -217,10 +227,10 @@ namespace RPG_Dom
                 obj.Draw(0.5f, camera);
             }
 
-/*            foreach (Object2d obj in consumables)
+            foreach (Object2d obj in consumables)
             {
                 obj.Draw(0.5f, camera);
-            }*/
+            }
         }
     }
 }
