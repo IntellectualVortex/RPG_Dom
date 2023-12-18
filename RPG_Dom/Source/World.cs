@@ -200,6 +200,8 @@ namespace RPG_Dom
                 {
                     if (enemies[j] != null)
                     {
+
+                        //CHECK ONLY IF NOT PLAYER
                         if (
                             isInsideRectangle( // BULLET TOP LEFT
                                 playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
