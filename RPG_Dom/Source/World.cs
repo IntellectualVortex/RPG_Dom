@@ -30,7 +30,7 @@ namespace RPG_Dom
 
 
         public Player player;
-        public MapTexture map; 
+        public MapTexture map;
         public Camera camera;
         public HealthBar healthBar;
         public PowerUp powerup;
@@ -41,14 +41,14 @@ namespace RPG_Dom
 
 
 
-            healthBar = new HealthBar("Assets\\element_red_rectangle", 
+            healthBar = new HealthBar("Assets\\element_red_rectangle",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
                 new Vector2(1, 0), 0f, 100);
 
-            player = new Player("Assets\\Knight", 
-                new Vector2(5000, 5000), 
-                new Vector2(100, 100), 
+            player = new Player("Assets\\Knight",
+                new Vector2(5000, 5000),
+                new Vector2(100, 100),
                 new Vector2(0, 0), 0f, 100);
 
 
@@ -123,11 +123,11 @@ namespace RPG_Dom
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            playerObjects.Add(healthBar);
+            //playerObjects.Add(healthBar);
             playerObjects.Add(player);
-            
 
-           
+
+
         }
 
 
@@ -152,7 +152,7 @@ namespace RPG_Dom
             player.primaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             player.secondaryCooldownTimer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             MouseState mouse = Mouse.GetState();
-            
+
 
             // Instantiating Bullet isntances on left/right mouse clicks
             if (mouse.LeftButton == ButtonState.Pressed)
@@ -183,7 +183,7 @@ namespace RPG_Dom
 
             foreach (Object2d enemy in enemies)
             {
-                
+
                 enemy.Update(camera);
             }
 
@@ -226,17 +226,13 @@ namespace RPG_Dom
                             )
                         {
 
-
-                            //enemiesDeathLoc.Add(enemies[j].pos);
-
-
                             powerup = new PowerUp("Assets\\chest_open_3",
                             new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
                             new Vector2(100, 100),
                             new Vector2(0, 0),
                             0f, 100);
 
-                            playerObjects.Remove(playerObjects[i]);
+                            //playerObjects.Remove(playerObjects[i]);
                             enemies.Remove(enemies[j]);
                             consumables.Add(powerup);
 
@@ -253,7 +249,7 @@ namespace RPG_Dom
         {
             return r_x_1 <= x && x <= r_x_2 && r_y_1 <= y && y <= r_y_2;
         }
-        
+
 
 
         public void Draw()
