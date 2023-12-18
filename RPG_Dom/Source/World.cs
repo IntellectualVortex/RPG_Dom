@@ -111,6 +111,53 @@ namespace RPG_Dom
                     new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                     new Vector2(120, 120),
                     new Vector2(1, 0), 0f, 100));
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
+            enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+
             #endregion
 
 
@@ -124,7 +171,7 @@ namespace RPG_Dom
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
             playerObjects.Add(healthBar);
-            playerObjects.Add(player);
+            //playerObjects.Add(player);
 
 
 
@@ -175,6 +222,7 @@ namespace RPG_Dom
                 }
             }
 
+            player.Update(camera);
 
             foreach (Object2d obj in playerObjects)
             {
@@ -194,57 +242,57 @@ namespace RPG_Dom
 
 
             // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
-            for (var i = 0; i < playerObjects.Count; i++)
-            {
-
-                if (playerObjects[i] is not Player player & playerObjects[i] is not HealthBar healthBar)
+            for (var j = 0; j < enemies.Count; j++)
                 {
-                    for (var j = 0; j < enemies.Count; j++)
+
+                 if (enemies[j] != null)
+                 {
+                    for (var i = 0; i < playerObjects.Count; i++)
                     {
-                        if (enemies[j] != null)
+                            //CHECK ONLY IF NOT PLAYER
+                        if (
+                            isInsideRectangle( // BULLET TOP LEFT
+                                playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET TOP RIGHT
+                                playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET BOT RIGHT
+                                playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            || isInsideRectangle( // BULLET BOT LEFT
+                                playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
+                                enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
+                                enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
+                                )
+                            )
                         {
 
-                            //CHECK ONLY IF NOT PLAYER
-                            if (
-                                isInsideRectangle( // BULLET TOP LEFT
-                                    playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
-                                    enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                                    enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                                    )
-                                || isInsideRectangle( // BULLET TOP RIGHT
-                                    playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
-                                    enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                                    enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                                    )
-                                || isInsideRectangle( // BULLET BOT RIGHT
-                                    playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                                    enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                                    enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                                    )
-                                || isInsideRectangle( // BULLET BOT LEFT
-                                    playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                                    enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                                    enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                                    )
-                                )
-                            {
-
-
-                                //enemiesDeathLoc.Add(enemies[j].pos);
-
-
-                                powerup = new PowerUp("Assets\\chest_open_3",
+                            powerup = new PowerUp("Assets\\chest_open_3",
                                 new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
                                 new Vector2(100, 100),
                                 new Vector2(0, 0),
                                 0f, 100);
 
-                                playerObjects.Remove(playerObjects[i]);
-                                enemies.Remove(enemies[j]);
-                                consumables.Add(powerup);
 
-                            }
+                            playerObjects.Remove(playerObjects[i]);
+                            enemies.Remove(enemies[j]);
+
+                            consumables.Add(powerup);
+
+
+                            
+
+
+
                         }
+                        
                     }
                 }
             }
@@ -263,7 +311,7 @@ namespace RPG_Dom
         public void Draw()
         {
             map.Draw(0.1f, camera);
-
+            player.Draw(0f, camera);
 
             foreach (Object2d enemy in enemies)
             {
