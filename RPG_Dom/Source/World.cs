@@ -32,7 +32,7 @@ namespace RPG_Dom
         public Player player;
         public MapTexture map;
         public Camera camera;
-        public HealthBar healthBar;
+        //public HealthBar healthBar;
         public PowerUp powerup;
 
 
@@ -40,11 +40,10 @@ namespace RPG_Dom
         {
 
 
-
-            healthBar = new HealthBar("Assets\\element_red_rectangle",
+            /*healthBar = new HealthBar("Assets\\element_red_rectangle",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
-                new Vector2(1, 0), 0f, 100);
+                new Vector2(1, 0), 0f, 100);*/
 
             player = new Player("Assets\\Knight",
                 new Vector2(5000, 5000),
@@ -170,7 +169,7 @@ namespace RPG_Dom
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            playerObjects.Add(healthBar);
+            //playerObjects.Add(healthBar);
             //playerObjects.Add(player);
 
 
@@ -181,7 +180,7 @@ namespace RPG_Dom
         public void Update(GameTime gameTime)
         {
             camera.pos = player.pos;
-            healthBar.pos = player.pos + new Vector2(0, -70);
+            //healthBar.pos = player.pos + new Vector2(0, -70);
 
             // Remove bullets if reach end of screen space
             for (var i = 0; i < playerObjects.Count; i++)
@@ -242,12 +241,12 @@ namespace RPG_Dom
 
 
             // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
-            for (var j = 0; j < enemies.Count - 1; j++)
+            for (var j = 0; j < enemies.Count; j++)
             {
                 for (var i = 0; i < playerObjects.Count; i++)
                 {
                     
-                        //CHECK ONLY IF NOT PLAYER
+                    //CHECK ONLY IF NOT PLAYER
                     if (
                         isInsideRectangle( // BULLET TOP LEFT
                             playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
@@ -271,20 +270,17 @@ namespace RPG_Dom
                             )
                         )
                     {
-                        j--;
-                        playerObjects.Remove(playerObjects[i]);
 
                         powerup = new PowerUp("Assets\\chest_open_3",
-                            new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
-                            new Vector2(100, 100),
-                            new Vector2(0, 0),
-                            0f, 100);
+                        new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
+                        new Vector2(100, 100),
+                        new Vector2(0, 0),
+                        0f, 100);
 
+                        playerObjects.Remove(playerObjects[i]);
                         enemies.Remove(enemies[j]);
-
                         consumables.Add(powerup);
-                        
-
+                        break;
                     }
                     
                 }
