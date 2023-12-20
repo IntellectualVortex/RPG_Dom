@@ -28,6 +28,7 @@ namespace RPG_Dom
         List<Object2d> worldObjects = new List<Object2d>();
         List<Object2d> consumables = new List<Object2d>();
 
+        //Figure out how to categorize HUD objects
 
         public Player player;
         public MapTexture map;
@@ -45,7 +46,7 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(1, 0), 0f, 100);*/
 
-            player = new Player("Assets\\Knight",
+            player = new Player(2, "Assets\\Knight",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f, 100);
@@ -315,6 +316,9 @@ namespace RPG_Dom
                     )
                 {
                     consumables.Remove(consumables[k]);
+                    player.primaryCooldownTimer += 100;
+
+                    player.speedMult *= 1.2f;
 
                 }
             }

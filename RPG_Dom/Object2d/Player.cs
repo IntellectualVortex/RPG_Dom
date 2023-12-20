@@ -17,13 +17,15 @@ namespace RPG_Dom
         public float secondaryCooldownTimer = 0;
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
+
+        //Normalize instead below
         private int speedCoefficient = 5;
-        private int speedMult = 5;
+        public float speedMult;
 
 
-        public Player(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
+        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
         {
-        
+            speedMult = SPEEDMULT;
         }
 
         public override void Update(Camera camera)
