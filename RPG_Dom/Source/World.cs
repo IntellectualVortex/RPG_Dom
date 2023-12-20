@@ -20,7 +20,7 @@ namespace RPG_Dom
 {
     public class World
     {
-        private int numOfBarbs = 10;
+        private int numOfBarbs = 20;
         Random rnd = new Random();
 
         List<Object2d> playerObjects = new List<Object2d>();
@@ -52,113 +52,16 @@ namespace RPG_Dom
                 new Vector2(0, 0), 0f, 100);
 
 
-            /*          // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-                        for (int i = 0; i < numOfBarbs; i++)
-                        {
-                            enemies.Add(new BarbarianEnemy(player,
-                                "Assets\\barb",
-                                new Vector2(5500 + (100), 5000 + (100)),
-                                new Vector2(120, 120),
-                                new Vector2(1, 0), 0f, 100));
-                        }*/
+            // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            for (int i = 0; i < numOfBarbs; i++)
+            {
+                enemies.Add(new BarbarianEnemy(player,
+                    "Assets\\barb",
+                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
+                    new Vector2(120, 120),
+                    new Vector2(1, 0), 0f, 100));
+            }
 
-
-            // EXPAND BELOW
-            #region BarbCreation
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
-
-            #endregion
 
 
             map = new MapTexture("Assets\\tex",
@@ -317,9 +220,7 @@ namespace RPG_Dom
                 {
                     consumables.Remove(consumables[k]);
                     player.primaryCooldownTimer += 100;
-
                     player.speedMult *= 1.2f;
-
                 }
             }
         }
