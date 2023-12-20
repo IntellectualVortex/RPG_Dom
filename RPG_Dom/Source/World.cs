@@ -245,7 +245,7 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < playerObjects.Count; i++)
                 {
-                    
+
                     //CHECK ONLY IF NOT PLAYER
                     if (
                         isInsideRectangle( // BULLET TOP LEFT
@@ -282,13 +282,43 @@ namespace RPG_Dom
                         consumables.Add(powerup);
                         break;
                     }
-                    
+
                 }
-       
+
             }
 
-        }
 
+            for (var k = 0; k < consumables.Count; k++) 
+            { 
+
+                if (
+                    isInsideRectangle( // BULLET TOP LEFT
+                        player.pos.X - (player.myObject.Width / 2), player.pos.Y - (player.myObject.Height / 2),
+                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
+                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
+                        )
+                    || isInsideRectangle( // BULLET TOP RIGHT
+                        player.pos.X + (player.myObject.Width / 2), player.pos.Y - (player.myObject.Height / 2),
+                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
+                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
+                        )
+                    || isInsideRectangle( // BULLET BOT RIGHT
+                        player.pos.X + (player.myObject.Width / 2), player.pos.Y + (player.myObject.Height / 2),
+                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
+                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
+                        )
+                    || isInsideRectangle( // BULLET BOT LEFT
+                        player.pos.X - (player.myObject.Width / 2), player.pos.Y + (player.myObject.Height / 2),
+                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
+                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
+                        )
+                    )
+                {
+                    consumables.Remove(consumables[k]);
+
+                }
+            }
+        }
 
         // Check whether sprite rectangle objects intersect with each other
         private bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)
