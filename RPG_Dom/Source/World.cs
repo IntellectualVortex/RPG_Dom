@@ -38,11 +38,8 @@ namespace RPG_Dom
         //public HealthBar healthBar;
         public PowerUp powerup;
 
-
         public World()
         {
-
-
 
             /*healthBar = new HealthBar("Assets\\element_red_rectangle",
                 new Vector2(5000, 5000),
@@ -163,30 +160,8 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < playerObjects.Count; i++)
                 {
-
-                    //CHECK ONLY IF NOT PLAYER
-                    if (
-                        isInsideRectangle( // BULLET TOP LEFT
-                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
-                            enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                            enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET TOP RIGHT
-                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y - (playerObjects[i].myObject.Height / 2),
-                            enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                            enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET BOT RIGHT
-                            playerObjects[i].pos.X + (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                            enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                            enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        || isInsideRectangle( // BULLET BOT LEFT
-                            playerObjects[i].pos.X - (playerObjects[i].myObject.Width / 2), playerObjects[i].pos.Y + (playerObjects[i].myObject.Height / 2),
-                            enemies[j].pos.X - (enemies[j].myObject.Width / 2), enemies[j].pos.Y - (enemies[j].myObject.Height / 2), // BARB TOP LEFT
-                            enemies[j].pos.X + (enemies[j].myObject.Width / 2), enemies[j].pos.Y + (enemies[j].myObject.Height / 2) // BARB BOT RIGHT
-                            )
-                        )
+                    if (Collision.EnemyCollision(playerObjects, enemies, i, j))
+                    
                     {
 
                         powerup = new PowerUp("Assets\\chest_open_3",

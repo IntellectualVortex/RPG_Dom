@@ -10,7 +10,6 @@ namespace RPG_Dom
     public class BarbarianEnemy : Object2d
     {
         Player player;
-        int speedCoefficient = 1;
 
         public string name;
 
@@ -30,7 +29,7 @@ namespace RPG_Dom
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
         private void updateVelocity(Camera camera)
         {
-            vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y) / GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y).Length() * speedCoefficient;
+            vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y) / GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y).Length();
         }
 
         private void updateRotation(Camera camera)
