@@ -52,10 +52,10 @@ namespace RPG_Dom
                 vel.Y = 0;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.W)) {
-                vel.Y = -1 * speedCoefficient;
+                vel.Y = -1;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S)) {
-                vel.Y = speedCoefficient;
+                vel.Y = 1;
             }
             else
             {
@@ -68,11 +68,11 @@ namespace RPG_Dom
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                vel.X = speedCoefficient;
+                vel.X = 1;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                vel.X = -1 * speedCoefficient;
+                vel.X = -1 ;
             }
             else
             {

@@ -10,7 +10,7 @@ namespace RPG_Dom
     public class PlayerPet : Object2d
     {
         public Player player;
-
+        Vector2 lastPos;
 
         public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
         {
