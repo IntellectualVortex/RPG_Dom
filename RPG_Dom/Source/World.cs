@@ -27,9 +27,11 @@ namespace RPG_Dom
         List<Object2d> enemies = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
         List<Object2d> consumables = new List<Object2d>();
+        List<Object2d> pets = new List<Object2d>();
 
         //Figure out how to categorize HUD objects
 
+        public PlayerPet pet;
         public Player player;
         public MapTexture map;
         public Camera camera;
@@ -39,6 +41,7 @@ namespace RPG_Dom
 
         public World()
         {
+
 
 
             /*healthBar = new HealthBar("Assets\\element_red_rectangle",
@@ -51,6 +54,13 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f, 100);
 
+
+            pet = new PlayerPet(player, "Assets\\pet",
+                new Vector2(5100, 5100),
+                new Vector2(100, 100),
+                new Vector2(1, 0), 0f, 100);
+
+            pets.Add(pet);
 
             // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             for (int i = 0; i < numOfBarbs; i++)
@@ -134,11 +144,15 @@ namespace RPG_Dom
 
             foreach (Object2d enemy in enemies)
             {
-
                 enemy.Update(camera);
             }
 
             foreach (Object2d obj in consumables)
+            {
+                obj.Update(camera);
+            }
+
+            foreach (Object2d obj in pets)
             {
                 obj.Update(camera);
             }
@@ -252,6 +266,11 @@ namespace RPG_Dom
             {
                 obj.Draw(0.5f, camera);
             }
+            foreach (Object2d obj in pets)
+            {
+                obj.Draw(0.5f, camera);
+            }
+
         }
     }
 }
