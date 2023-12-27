@@ -10,7 +10,7 @@ namespace RPG_Dom
     public class PlayerPet : Object2d
     {
         public Player player;
-        Vector2 lastPos;
+
 
         public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
         {
@@ -28,7 +28,10 @@ namespace RPG_Dom
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
         private void updateVelocity(Camera camera)
         {
-            vel = GameCalcs.MoveToPlayer((int)player.pos.X + 50, (int)player.pos.Y + 50, (int)this.pos.X, (int)this.pos.Y) / GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y).Length();
+            vel = GameCalcs.MoveToPlayer((int)player.pos.X + 50, (int)player.pos.Y + 50, (int)this.pos.X, (int)this.pos.Y);
+            vel.Normalize();
+
+            
         }
         private void updateRotation(Camera camera)
         {

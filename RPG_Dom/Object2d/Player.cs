@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 #endregion
 
@@ -18,9 +21,9 @@ namespace RPG_Dom
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
 
-        //Normalize instead below
-        private int speedCoefficient = 5;
+
         public float speedMult;
+        public List<Vector2> lastPositions = new List<Vector2>();
 
 
         public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
@@ -30,6 +33,11 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
+            
+            lastPositions.Add(pos);
+
+            //Debug.WriteLine(lastPositions[i++]);
+
             updateRotation(camera);
             updateVelocity();
             base.Update(camera);
@@ -82,8 +90,7 @@ namespace RPG_Dom
             if (vel != Vector2.Zero)
             {
                 vel.Normalize();
-                vel.X *= speedMult;
-                vel.Y *= speedMult;
+                vel *= speedMult;
             }
         }
       
