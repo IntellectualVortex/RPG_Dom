@@ -54,7 +54,7 @@ namespace RPG_Dom
         public static List<CollisionEvent> ObjectListCollision(List<Object2d> objList, List<Object2d> objList2)
         {
 
-            List<Object2d> CollisionEvents = new List<Object2d>();
+            List<CollisionEvent> CollisionEvents = new List<CollisionEvent>();
 
             for (var j = 0; j < objList.Count; j++)
             {
@@ -63,13 +63,12 @@ namespace RPG_Dom
 
                     if (ObjectCollision(objList[i], objList2[j]))
                     {
-                        CollisionEvents.Add() ;
+                        CollisionEvent col = new CollisionEvent(objList[i], objList2[j]);
+                        CollisionEvents.Add(col);
                     }
-
                 }
-
             }
-            ;
+            return CollisionEvents;
         }
     }
 
