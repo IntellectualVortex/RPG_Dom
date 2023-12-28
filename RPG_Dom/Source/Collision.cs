@@ -48,18 +48,18 @@ namespace RPG_Dom
             return false;
         }
 
-        public static bool ObjectListCollision(List<Object2d> objList, List<Object2d> objList2)
+        public static ObjectListCollision(List<Object2d> objList, List<Object2d> objList2)
         {
             for (var j = 0; j < objList.Count; j++)
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-                    return ObjectCollision(Object2d obj, Object2d obj2); //IDK how to do this halp
+                    ObjectCollision(Object2d obj, Object2d obj2); //IDK how to do this halp
 
                 }
 
             }
-            return false;
+         
         }
     }
 
