@@ -10,7 +10,7 @@ namespace RPG_Dom
 {
     public static class Collision
     {
-        public Collision() { }  
+        static Collision() { }  
 
         // Check whether sprite rectangle objects intersect with each other
         private static bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)
@@ -48,18 +48,18 @@ namespace RPG_Dom
             return false;
         }
 
-        public static ObjectListCollision(List<Object2d> objList, List<Object2d> objList2)
+        public static bool ObjectListCollision(List<Object2d> objList, List<Object2d> objList2)
         {
             for (var j = 0; j < objList.Count; j++)
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-                    ObjectCollision(Object2d obj, Object2d obj2); //IDK how to do this halp
+                    return ObjectCollision(objList[i], objList2[j]);
 
                 }
 
             }
-         
+            return false;
         }
     }
 

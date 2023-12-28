@@ -154,8 +154,8 @@ namespace RPG_Dom
                 obj.Update(camera);
             }
 
-
-            // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
+            Collision.ObjectListCollision(playerObjects, enemies);
+/*            // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
             for (var j = 0; j < enemies.Count; j++)
             {
                 for (var i = 0; i < playerObjects.Count; i++)
@@ -177,7 +177,7 @@ namespace RPG_Dom
 
                 }
 
-            }
+            }*/
 
 
             for (var k = 0; k < consumables.Count; k++) 
