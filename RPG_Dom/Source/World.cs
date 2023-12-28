@@ -154,30 +154,23 @@ namespace RPG_Dom
                 obj.Update(camera);
             }
 
-            Collision.ObjectListCollision(playerObjects, enemies);
-/*            // Collision check on any part of enemy based on each corner of the bullet sprite rectangle
-            for (var j = 0; j < enemies.Count; j++)
+
+            if (Collision.ObjectListCollision(playerObjects, enemies))
             {
-                for (var i = 0; i < playerObjects.Count; i++)
-                {
-                    if (Collision.EnemyCollision(playerObjects, enemies, i, j))
-                    
-                    {
-                        powerup = new PowerUp("Assets\\chest_open_3", 
-                        new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
-                        new Vector2(100, 100),
-                        new Vector2(0, 0),
-                        0f, 100);
+                powerup = new PowerUp("Assets\\chest_open_3",
+                new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
+                new Vector2(100, 100),
+                new Vector2(0, 0),
+                0f, 100);
 
-                        playerObjects.Remove(playerObjects[i]);
-                        enemies.Remove(enemies[j]);
-                        consumables.Add(powerup);
-                        break;
-                    }
+                playerObjects.Remove(playerObjects[i]);
+                enemies.Remove(enemies[j]);
+                consumables.Add(powerup);
+            }
 
-                }
 
-            }*/
+
+
 
 
             for (var k = 0; k < consumables.Count; k++) 
