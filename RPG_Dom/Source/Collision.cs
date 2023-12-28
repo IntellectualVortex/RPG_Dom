@@ -54,7 +54,7 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-                    return ObjectCollision(Object2d obj, Object2d obj2);
+                    return ObjectCollision(Object2d obj, Object2d obj2); //IDK how to do this halp
 
                 }
 
