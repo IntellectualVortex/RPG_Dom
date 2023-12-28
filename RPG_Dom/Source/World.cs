@@ -163,7 +163,6 @@ namespace RPG_Dom
                     if (Collision.EnemyCollision(playerObjects, enemies, i, j))
                     
                     {
-
                         powerup = new PowerUp("Assets\\chest_open_3",
                         new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
                         new Vector2(100, 100),

@@ -28,10 +28,17 @@ namespace RPG_Dom
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
         private void updateVelocity(Camera camera)
         {
-            vel = GameCalcs.MoveToPlayer((int)player.pos.X + 50, (int)player.pos.Y + 50, (int)this.pos.X, (int)this.pos.Y);
-            vel.Normalize();
+            if (Math.Abs(pos.X - player.pos.X) > 75 || Math.Abs(pos.Y - player.pos.Y) > 75)
+            {
+                vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y);
+                vel.Normalize();
+            }
 
-            
+            else 
+            {
+                vel = new Vector2(0,0);
+            }
+
         }
         private void updateRotation(Camera camera)
         {
