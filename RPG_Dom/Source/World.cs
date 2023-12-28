@@ -38,6 +38,7 @@ namespace RPG_Dom
         //public HealthBar healthBar;
         public PowerUp powerup;
 
+
         public World()
         {
 
@@ -155,17 +156,18 @@ namespace RPG_Dom
             }
 
 
-            if (Collision.ObjectListCollision(playerObjects, enemies))
-            {
-                powerup = new PowerUp("Assets\\chest_open_3",
-                new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
-                new Vector2(100, 100),
-                new Vector2(0, 0),
-                0f, 100);
+            //IMPLEMENT COLLISION FROM COLLISION.CS
 
-                playerObjects.Remove(playerObjects[i]);
-                enemies.Remove(enemies[j]);
-                consumables.Add(powerup);
+
+            {
+                /*                powerup = new PowerUp("Assets\\chest_open_3",
+                                new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
+                                new Vector2(100, 100),
+                                new Vector2(0, 0),
+                                0f, 100);
+
+
+                                consumables.Add(powerup);*/
             }
 
 

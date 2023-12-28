@@ -21,7 +21,6 @@ namespace RPG_Dom
 
         public static bool ObjectCollision(Object2d obj, Object2d obj2)
         {
-
             if (
                 isInsideRectangle( // BULLET TOP LEFT
                     obj.pos.X - (obj.myObject.Width / 2), obj.pos.Y - (obj.myObject.Height / 2),
@@ -60,7 +59,6 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-
                     if (ObjectCollision(objList[i], objList2[j]))
                     {
                         CollisionEvent col = new CollisionEvent(objList[i], objList2[j]);
