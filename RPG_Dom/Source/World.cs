@@ -38,9 +38,15 @@ namespace RPG_Dom
         //public HealthBar healthBar;
         public PowerUp powerup;
 
+        // private ConsumableFactory consumableFactory;
+
 
         public World()
         {
+            // Create factory, classes that return some new instances of these class, could make e.g.:
+            // - PlayerFactory with create() which return an instance of Player etc
+            // - PlayerPetFactory with public PlayerPet create(Player player) which return an instance of Player etc
+            // - ConsumableFactory with public Consumable create(Barbarian barb) which return an instance of Player etc
 
             /*healthBar = new HealthBar("Assets\\element_red_rectangle",
                 new Vector2(5000, 5000),
@@ -135,6 +141,8 @@ namespace RPG_Dom
 
             player.Update(camera);
 
+
+            // Create IUpdateable interface
             foreach (Object2d obj in playerObjects)
             {
                 obj.Update(camera);
@@ -159,72 +167,33 @@ namespace RPG_Dom
             //IMPLEMENT COLLISION FROM COLLISION.CS
             
 
-            var collisions = Collision.ObjectListCollision(enemies, playerObjects);
+            List<CollisionEvent<Object2d>> collisions = Collision.ObjectListCollision(enemies, playerObjects);
             
-            foreach (CollisionEvent collision in collisions)
+            foreach (CollisionEvent<Object2d> collision in collisions)
             {
                 enemies.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
+                powerup = new PowerUp("Assets\\chest_open_3",
+                               new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
+                               new Vector2(100, 100),
+                               new Vector2(0, 0),
+                               0f, 100);
+                consumables.Add(powerup);
             }
-            
-
-           
-                /*                powerup = new PowerUp("Assets\\chest_open_3",
-                                new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
-                                new Vector2(100, 100),
-                                new Vector2(0, 0),
-                                0f, 100);
 
 
-                                consumables.Add(powerup);*/
-            
+            List<CollisionEvent<Object2d>> consumableCollisions = Collision.ObjectCollision(player, consumables);
 
-
-
-
-
-
-            for (var k = 0; k < consumables.Count; k++) 
-            { 
-
-                if (
-                    isInsideRectangle( // BULLET TOP LEFT
-                        player.pos.X - (player.myObject.Width / 2), player.pos.Y - (player.myObject.Height / 2),
-                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
-                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
-                        )
-                    || isInsideRectangle( // BULLET TOP RIGHT
-                        player.pos.X + (player.myObject.Width / 2), player.pos.Y - (player.myObject.Height / 2),
-                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
-                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
-                        )
-                    || isInsideRectangle( // BULLET BOT RIGHT
-                        player.pos.X + (player.myObject.Width / 2), player.pos.Y + (player.myObject.Height / 2),
-                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
-                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
-                        )
-                    || isInsideRectangle( // BULLET BOT LEFT
-                        player.pos.X - (player.myObject.Width / 2), player.pos.Y + (player.myObject.Height / 2),
-                        consumables[k].pos.X - (consumables[k].myObject.Width / 2), consumables[k].pos.Y - (consumables[k].myObject.Height / 2), // BARB TOP LEFT
-                        consumables[k].pos.X + (consumables[k].myObject.Width / 2), consumables[k].pos.Y + (consumables[k].myObject.Height / 2) // BARB BOT RIGHT
-                        )
-                    )
-                {
-                    consumables.Remove(consumables[k]);
-                    player.primaryCooldownTimer += 100;
-                    player.speedMult *= 1.2f;
-                }
+            foreach (CollisionEvent<Object2d> collision in consumableCollisions)
+            {
+                consumables.Remove(collision.CollidingObject2);
+                player.primaryCooldownTimer += 100;
+                player.speedMult *= 1.2f;
             }
         }
 
-        // Check whether sprite rectangle objects intersect with each other
-        private bool isInsideRectangle(float x, float y, float r_x_1, float r_y_1, float r_x_2, float r_y_2)
-        {
-            return r_x_1 <= x && x <= r_x_2 && r_y_1 <= y && y <= r_y_2;
-        }
 
-
-
+        // Create IDrawable interface
         public void Draw()
         {
             map.Draw(0.1f, camera);

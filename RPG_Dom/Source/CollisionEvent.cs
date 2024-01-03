@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RPG_Dom
 {
-    public struct CollisionEvent
+    public class CollisionEvent<T>
     {
-        public Object2d CollidingObject1;
-        public Object2d CollidingObject2;
+        public T CollidingObject1;
+        public T CollidingObject2;
 
-        public CollisionEvent(Object2d collidingObject1, Object2d collidingObject2)
+        public CollisionEvent(T collidingObject1, T collidingObject2)
         {
             CollidingObject1 = collidingObject1;
             CollidingObject2 = collidingObject2;
