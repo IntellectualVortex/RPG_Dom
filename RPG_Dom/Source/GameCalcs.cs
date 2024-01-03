@@ -30,16 +30,25 @@ namespace RPG_Dom
         }
 
 
-        public static float CalculateCrit(Player player, Random rnd)
+
+        public static float CalculateCritDamage(float playerBaseAttack, float weaponBaseDamage)
+        {
+            return 0;
+        }
+
+
+        // Add CalculateCritDamage function above
+
+        public static bool CalculateCrit(Player player, Random rnd)
         {
             if (rnd.Next() <= player.critChance)
             {
-                return 1; //temporary until creating damage and weapon system
+                return true; //temporary until creating damage and weapon system
             }
 
             else
             {
-                return 0;
+                return false;
             }
         }
 
