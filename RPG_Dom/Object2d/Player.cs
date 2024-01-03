@@ -20,7 +20,8 @@ namespace RPG_Dom
         public float secondaryCooldownTimer = 0;
         public float playerPrimaryCooldownLength = 100;
         public float playerSecondaryCooldownLength = 500;
-
+        public float critChance = 20;
+        public float baseAttack = 10;
 
         public float speedMult;
         public List<Vector2> lastPositions = new List<Vector2>();

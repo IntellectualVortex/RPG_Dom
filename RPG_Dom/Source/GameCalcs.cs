@@ -30,6 +30,19 @@ namespace RPG_Dom
         }
 
 
+        public static float CalculateCrit(Player player, Random rnd)
+        {
+            if (rnd.Next() <= player.critChance)
+            {
+                return 1; //temporary until creating damage and weapon system
+            }
+
+            else
+            {
+                return 0;
+            }
+        }
+
 
         public static Vector2 MoveToPlayer(int X, int Y, int X2, int Y2)
         {
