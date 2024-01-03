@@ -47,7 +47,7 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(1, 0), 0f, 100);*/
 
-            player = new Player(2, "Assets\\Knight",
+            player = new Player(10, "Assets\\Knight",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f, 100);
@@ -157,9 +157,18 @@ namespace RPG_Dom
 
 
             //IMPLEMENT COLLISION FROM COLLISION.CS
+            
 
-
+            var collisions = Collision.ObjectListCollision(enemies, playerObjects);
+            
+            foreach (CollisionEvent collision in collisions)
             {
+                enemies.Remove(collision.CollidingObject1);
+                playerObjects.Remove(collision.CollidingObject2);
+            }
+            
+
+           
                 /*                powerup = new PowerUp("Assets\\chest_open_3",
                                 new Vector2(enemies[j].pos.X, enemies[j].pos.Y),
                                 new Vector2(100, 100),
@@ -168,7 +177,7 @@ namespace RPG_Dom
 
 
                                 consumables.Add(powerup);*/
-            }
+            
 
 
 

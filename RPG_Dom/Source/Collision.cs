@@ -1,6 +1,7 @@
 ﻿using RPG_Dom;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -59,9 +60,10 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-                    if (ObjectCollision(objList[i], objList2[j]))
+
+                    if (ObjectCollision(objList[j], objList2[i]))
                     {
-                        CollisionEvent col = new CollisionEvent(objList[i], objList2[j]);
+                        CollisionEvent col = new CollisionEvent(objList[j], objList2[i]);
                         CollisionEvents.Add(col);
                     }
                 }

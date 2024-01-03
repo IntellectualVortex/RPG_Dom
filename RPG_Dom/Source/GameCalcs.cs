@@ -31,7 +31,7 @@ namespace RPG_Dom
 
 
 
-        public static float CalculateCritDamage(float playerBaseAttack, float weaponBaseDamage)
+        public static float CalculateCritDamage(float playerBaseAttack, float weaponBaseDamage, float weaponCritChance)
         {
             return 0;
         }
