@@ -11,10 +11,10 @@ using System;
 
 namespace RPG_Dom 
 { 
-    public class PowerUp : Object2d
+    public class Consumable : Object2d
     {
 
-        public PowerUp(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)  
+        public Consumable(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)  
         { 
         
         }

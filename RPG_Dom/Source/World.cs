@@ -55,7 +55,7 @@ namespace RPG_Dom
             player = new Player(10, "Assets\\Knight",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
-                new Vector2(0, 0), 0f, 100);
+                new Vector2(0, 0), 0f);
 
            
             
@@ -67,7 +67,7 @@ namespace RPG_Dom
                     "Assets\\barb",
                     new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                     new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
+                    new Vector2(1, 0), 0f));
             }
 
 
@@ -75,7 +75,7 @@ namespace RPG_Dom
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
                 new Vector2(5000, 5000),
-                new Vector2(1, 0), 0f, 100);
+                new Vector2(1, 0), 0f);
 
 
 
@@ -166,13 +166,14 @@ namespace RPG_Dom
             
             foreach (CollisionEvent<Object2d> collision in collisions)
             {
+                // How to create pet factory using collision pos data?
                 enemies.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
                 powerup = new PowerUp("Assets\\chest_open_3",
                                new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
                                new Vector2(100, 100),
                                new Vector2(0, 0),
-                               0f, 100);
+                               0f);
                 consumables.Add(powerup);
             }
 

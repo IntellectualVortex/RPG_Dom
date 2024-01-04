@@ -12,7 +12,7 @@ namespace RPG_Dom
         public Player player;
 
 
-        public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
             player = PLAYER;
         }

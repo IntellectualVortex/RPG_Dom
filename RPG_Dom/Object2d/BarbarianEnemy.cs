@@ -13,7 +13,7 @@ namespace RPG_Dom
 
         public string name;
 
-        public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
             player = PLAYER;
         }

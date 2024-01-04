@@ -27,7 +27,7 @@ namespace RPG_Dom
         public List<Vector2> lastPositions = new List<Vector2>();
 
 
-        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
+        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
         {
             speedMult = SPEEDMULT;
         }
@@ -101,7 +101,7 @@ namespace RPG_Dom
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width - 10, myObject.Bounds.Height - 10),
                     new Vector2((float)Math.Cos(rot),(float)Math.Sin(rot)) * 10f,
-                    rot, 100);
+                    rot);
         }
 
         public Bullet createBulletSecondary()
@@ -110,7 +110,7 @@ namespace RPG_Dom
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width + 50, myObject.Bounds.Height + 50),
                     new Vector2((float)Math.Cos(rot), (float)Math.Sin(rot)) * 10f,
-                    rot, 100);
+                    rot);
         }
 
 

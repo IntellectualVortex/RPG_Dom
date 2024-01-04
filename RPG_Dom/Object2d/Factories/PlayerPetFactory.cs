@@ -23,7 +23,7 @@ namespace RPG_Dom
             return new PlayerPet(player, "Assets\\pet",
                 new Vector2(player.pos.X + 100, player.pos.Y + 100),
                 new Vector2(100, 100),
-                new Vector2(1, 0), 0f, 100);
+                new Vector2(1, 0), 0f);
         }
     }
 }

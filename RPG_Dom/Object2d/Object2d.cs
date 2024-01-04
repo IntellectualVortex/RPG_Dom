@@ -22,13 +22,12 @@ namespace RPG_Dom
             return new Rectangle((int)pos.X - myObject.Width / 2, (int)pos.Y - myObject.Height / 2, myObject.Width, myObject.Height);
         }
 
-        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT = 0, float HEALTH = 100)
+        public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT)
         {
             pos = POS;
             dims = DIMS;
             vel = VEL;
             rot = ROT;
-            health = HEALTH;
 
             myObject = Globals.content.Load<Texture2D>(PATH);
          

@@ -21,7 +21,7 @@ namespace RPG_Dom
     public class MapTexture : Object2d
     {
 
-        public MapTexture(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        public MapTexture(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
             
         }
