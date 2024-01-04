@@ -63,11 +63,7 @@ namespace RPG_Dom
             // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             for (int i = 0; i < numOfBarbs; i++)
             {
-                enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f));
+                enemies.Add(BarbarianFactory.Create(player));
             }
 
 
