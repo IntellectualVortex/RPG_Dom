@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using RPG_Dom.Interfaces;
 using System;
 #endregion
 
@@ -54,7 +53,7 @@ namespace RPG_Dom
             {
                 flipDirection = SpriteEffects.FlipVertically;
             }
-            var rectangle = camera.worldSpaceToCameraSpace(this);
+            var rectangle = camera.WorldSpaceToCameraSpace(this);
             Globals.spriteBatch.Draw(myObject,
                 rectangle,
                 null,

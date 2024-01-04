@@ -114,7 +114,7 @@ namespace RPG_Dom
 
                 if (player.primaryCooldownTimer >= player.playerPrimaryCooldownLength)
                 {
-                    playerObjects.Add(player.createBulletPrimary());
+                    playerObjects.Add(player.CreateBulletPrimary());
 
                     player.primaryCooldownTimer = 0;
                 }
@@ -124,7 +124,7 @@ namespace RPG_Dom
             {
                 if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
                 {
-                    playerObjects.Add(player.createBulletSecondary());
+                    playerObjects.Add(player.CreateBulletSecondary());
                     player.secondaryCooldownTimer = 2;
                 }
             }

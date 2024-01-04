@@ -20,7 +20,7 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
-            updateRotation(camera);
+            UpdateRotation(camera);
             Move(camera);
             base.Update(camera);
         }
@@ -32,6 +32,7 @@ namespace RPG_Dom
             {
                 vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y);
                 vel.Normalize();
+                vel *= player.speedMult;
             }
 
             else 
@@ -40,7 +41,7 @@ namespace RPG_Dom
             }
 
         }
-        private void updateRotation(Camera camera)
+        private void UpdateRotation(Camera camera)
         {
             var distance = new Vector2(player.pos.X - pos.X, player.pos.Y - pos.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);

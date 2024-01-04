@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using RPG_Dom.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,14 +38,14 @@ namespace RPG_Dom
             //lastPositions.Add(pos);
             //Debug.WriteLine(lastPositions[i++]);
 
-            updateRotation(camera);
+            UpdateRotation(camera);
             MoveWASD();
             base.Update(camera);
         }
 
-        private void updateRotation(Camera camera)
+        private void UpdateRotation(Camera camera)
         {
-            var rectangle = camera.worldSpaceToCameraSpace(this);
+            var rectangle = camera.WorldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
@@ -95,7 +94,7 @@ namespace RPG_Dom
             }
         }
       
-        public Bullet createBulletPrimary()
+        public Bullet CreateBulletPrimary()
         {
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
@@ -104,7 +103,7 @@ namespace RPG_Dom
                     rot);
         }
 
-        public Bullet createBulletSecondary()
+        public Bullet CreateBulletSecondary()
         {
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
