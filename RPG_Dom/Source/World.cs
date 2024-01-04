@@ -30,7 +30,6 @@ namespace RPG_Dom
         List<Object2d> pets = new List<Object2d>();
 
         //Figure out how to categorize HUD objects
-
         public PlayerPet pet;
         public Player player;
         public MapTexture map;
@@ -58,13 +57,8 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f, 100);
 
-
-            pet = new PlayerPet(player, "Assets\\pet",
-                new Vector2(5100, 5100),
-                new Vector2(100, 100),
-                new Vector2(1, 0), 0f, 100);
-
-            pets.Add(pet);
+           
+            
 
             // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             for (int i = 0; i < numOfBarbs; i++)
@@ -142,6 +136,7 @@ namespace RPG_Dom
             player.Update(camera);
 
 
+
             // Create IUpdateable interface
             foreach (Object2d obj in playerObjects)
             {
@@ -186,9 +181,10 @@ namespace RPG_Dom
 
             foreach (CollisionEvent<Object2d> collision in consumableCollisions)
             {
+                pets.Add(PlayerPetFactory.Create(player));
                 consumables.Remove(collision.CollidingObject2);
                 player.primaryCooldownTimer += 100;
-                player.speedMult *= 1.2f;
+                player.speedMult *= 1.05f;
             }
         }
 

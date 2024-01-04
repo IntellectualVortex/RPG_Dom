@@ -17,6 +17,7 @@ namespace RPG_Dom
         public float rot, health;
         public Texture2D myObject;
 
+
         public Rectangle Hitbox() {
             return new Rectangle((int)pos.X - myObject.Width / 2, (int)pos.Y - myObject.Height / 2, myObject.Width, myObject.Height);
         }
