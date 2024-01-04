@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class PlayerPet : Object2d
+    public class PlayerPet : Object2d, IMoveable
     {
         public Player player;
 
@@ -21,12 +21,12 @@ namespace RPG_Dom
         public override void Update(Camera camera)
         {
             updateRotation(camera);
-            updateVelocity(camera);
+            Move(camera);
             base.Update(camera);
         }
 
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
-        private void updateVelocity(Camera camera)
+        public void Move(Camera camera)
         {
             if (Math.Abs(pos.X - player.pos.X) > 75 || Math.Abs(pos.Y - player.pos.Y) > 75)
             {

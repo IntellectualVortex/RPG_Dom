@@ -181,7 +181,7 @@ namespace RPG_Dom
                 pets.Add(PlayerPetFactory.Create(player));
                 consumables.Remove(collision.CollidingObject2);
                 player.primaryCooldownTimer += 100;
-                player.speedMult *= 1.05f;
+                player.speedMult *= 1.02f;
             }
         }
 

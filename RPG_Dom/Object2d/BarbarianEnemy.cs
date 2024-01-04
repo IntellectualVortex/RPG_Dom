@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class BarbarianEnemy : Object2d
+    public class BarbarianEnemy : Object2d, IMoveable
     {
         Player player;
 
@@ -22,12 +22,12 @@ namespace RPG_Dom
         public override void Update(Camera camera)
         {
             updateRotation(camera);
-            updateVelocity(camera);
+            Move(camera);
             base.Update(camera);
         }
 
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
-        private void updateVelocity(Camera camera)
+        public void Move(Camera camera)
         {
             vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y) / GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y).Length();
         }
