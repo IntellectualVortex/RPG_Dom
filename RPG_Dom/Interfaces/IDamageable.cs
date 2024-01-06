@@ -2,7 +2,7 @@
 
 namespace RPG_Dom
 {
-    public interface IHitbox
+    public interface IDamageable
     {
         Rectangle Hitbox();
     }
