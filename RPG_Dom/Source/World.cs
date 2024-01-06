@@ -34,7 +34,7 @@ namespace RPG_Dom
         public Player player;
         public MapTexture map;
         public Camera camera;
-        //public HealthBar healthBar;
+        public HealthBar healthBar;
         public PowerUp powerup;
 
         // private ConsumableFactory consumableFactory;

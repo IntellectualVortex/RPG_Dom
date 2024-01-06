@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace RPG_Dom
 {
-    public class Player : Object2d, IMoveableWASD
+    public class Player : Object2d
     {
         public float primaryCooldownTimer = 0;
         public float secondaryCooldownTimer = 0;
@@ -39,7 +39,7 @@ namespace RPG_Dom
             //Debug.WriteLine(lastPositions[i++]);
 
             UpdateRotation(camera);
-            MoveWASD();
+            GetVelocity();
             base.Update(camera);
         }
 
@@ -53,7 +53,7 @@ namespace RPG_Dom
 
 
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
-        public void MoveWASD()
+        public void GetVelocity()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.S)) 
             {
