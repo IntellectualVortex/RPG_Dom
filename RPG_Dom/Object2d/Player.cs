@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace RPG_Dom
 {
-    public class Player : Object2d
+    public class Player : Object2d, IHeal
     {
         public float primaryCooldownTimer = 0;
         public float secondaryCooldownTimer = 0;

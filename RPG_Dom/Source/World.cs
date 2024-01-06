@@ -47,10 +47,10 @@ namespace RPG_Dom
             // - PlayerPetFactory with public PlayerPet create(Player player) which return an instance of Player etc
             // - ConsumableFactory with public Consumable create(Barbarian barb) which return an instance of Player etc
 
-            /*healthBar = new HealthBar("Assets\\element_red_rectangle",
+            healthBar = new HealthBar("Assets\\element_red_rectangle",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
-                new Vector2(1, 0), 0f, 100);*/
+                new Vector2(1, 0), 0f);
 
             player = new Player(10, "Assets\\Knight",
                 new Vector2(5000, 5000),
@@ -77,8 +77,8 @@ namespace RPG_Dom
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            //playerObjects.Add(healthBar);
-            //playerObjects.Add(player);
+            playerObjects.Add(healthBar);
+            playerObjects.Add(player);
 
 
 

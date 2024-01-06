@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class BarbarianEnemy : Object2d, IMoveable
+    public class BarbarianEnemy : Object2d
     {
         Player player;
 

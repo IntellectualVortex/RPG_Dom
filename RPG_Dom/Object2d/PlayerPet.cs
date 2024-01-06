@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class PlayerPet : Object2d, IMoveable
+    public class PlayerPet : Object2d
     {
         public Player player;
 

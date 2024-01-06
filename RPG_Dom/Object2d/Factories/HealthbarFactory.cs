@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RPG_Dom
-{ 
-    public interface EnemyHealth
+{
+    internal class HealthbarFactory
     {
-        public void UpdateHealth() { }
     }
 }
