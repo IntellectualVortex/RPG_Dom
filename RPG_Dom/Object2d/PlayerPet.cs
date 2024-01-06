@@ -7,12 +7,12 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class PlayerPet : Object2d
+    public class PlayerPet : Object2d, IMoveable
     {
         public Player player;
 
 
-        public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        public PlayerPet(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
             player = PLAYER;
         }
@@ -20,18 +20,19 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
-            updateRotation(camera);
-            updateVelocity(camera);
+            UpdateRotation(camera);
+            Move(camera);
             base.Update(camera);
         }
 
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
-        private void updateVelocity(Camera camera)
+        public void Move(Camera camera)
         {
             if (Math.Abs(pos.X - player.pos.X) > 75 || Math.Abs(pos.Y - player.pos.Y) > 75)
             {
                 vel = GameCalcs.MoveToPlayer((int)player.pos.X, (int)player.pos.Y, (int)this.pos.X, (int)this.pos.Y);
                 vel.Normalize();
+                vel *= player.speedMult;
             }
 
             else 
@@ -40,7 +41,7 @@ namespace RPG_Dom
             }
 
         }
-        private void updateRotation(Camera camera)
+        private void UpdateRotation(Camera camera)
         {
             var distance = new Vector2(player.pos.X - pos.X, player.pos.Y - pos.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);

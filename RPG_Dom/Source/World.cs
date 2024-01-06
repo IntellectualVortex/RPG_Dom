@@ -30,7 +30,6 @@ namespace RPG_Dom
         List<Object2d> pets = new List<Object2d>();
 
         //Figure out how to categorize HUD objects
-
         public PlayerPet pet;
         public Player player;
         public MapTexture map;
@@ -56,24 +55,15 @@ namespace RPG_Dom
             player = new Player(10, "Assets\\Knight",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
-                new Vector2(0, 0), 0f, 100);
+                new Vector2(0, 0), 0f);
 
-
-            pet = new PlayerPet(player, "Assets\\pet",
-                new Vector2(5100, 5100),
-                new Vector2(100, 100),
-                new Vector2(1, 0), 0f, 100);
-
-            pets.Add(pet);
+           
+            
 
             // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             for (int i = 0; i < numOfBarbs; i++)
             {
-                enemies.Add(new BarbarianEnemy(player,
-                    "Assets\\barb",
-                    new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
-                    new Vector2(120, 120),
-                    new Vector2(1, 0), 0f, 100));
+                enemies.Add(BarbarianFactory.Create(player));
             }
 
 
@@ -81,7 +71,7 @@ namespace RPG_Dom
             map = new MapTexture("Assets\\tex",
                 new Vector2(5000, 5000),
                 new Vector2(5000, 5000),
-                new Vector2(1, 0), 0f, 100);
+                new Vector2(1, 0), 0f);
 
 
 
@@ -124,7 +114,7 @@ namespace RPG_Dom
 
                 if (player.primaryCooldownTimer >= player.playerPrimaryCooldownLength)
                 {
-                    playerObjects.Add(player.createBulletPrimary());
+                    playerObjects.Add(player.CreateBulletPrimary());
 
                     player.primaryCooldownTimer = 0;
                 }
@@ -134,12 +124,13 @@ namespace RPG_Dom
             {
                 if (player.secondaryCooldownTimer >= player.playerSecondaryCooldownLength)
                 {
-                    playerObjects.Add(player.createBulletSecondary());
+                    playerObjects.Add(player.CreateBulletSecondary());
                     player.secondaryCooldownTimer = 2;
                 }
             }
 
             player.Update(camera);
+
 
 
             // Create IUpdateable interface
@@ -171,13 +162,14 @@ namespace RPG_Dom
             
             foreach (CollisionEvent<Object2d> collision in collisions)
             {
+                // How to create pet factory using collision pos data?
                 enemies.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
                 powerup = new PowerUp("Assets\\chest_open_3",
                                new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
                                new Vector2(100, 100),
                                new Vector2(0, 0),
-                               0f, 100);
+                               0f);
                 consumables.Add(powerup);
             }
 
@@ -186,9 +178,10 @@ namespace RPG_Dom
 
             foreach (CollisionEvent<Object2d> collision in consumableCollisions)
             {
+                pets.Add(PlayerPetFactory.Create(player));
                 consumables.Remove(collision.CollidingObject2);
                 player.primaryCooldownTimer += 100;
-                player.speedMult *= 1.2f;
+                player.speedMult *= 1.02f;
             }
         }
 

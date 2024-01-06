@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace RPG_Dom
 {
-    public class Player : Object2d
+    public class Player : Object2d, IMoveableWASD
     {
         public float primaryCooldownTimer = 0;
         public float secondaryCooldownTimer = 0;
@@ -24,10 +24,10 @@ namespace RPG_Dom
         public float baseAttack = 10;
 
         public float speedMult;
-        public List<Vector2> lastPositions = new List<Vector2>();
+        //public List<Vector2> lastPositions = new List<Vector2>();
 
 
-        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH) 
+        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
         {
             speedMult = SPEEDMULT;
         }
@@ -35,18 +35,17 @@ namespace RPG_Dom
         public override void Update(Camera camera)
         {
             
-            lastPositions.Add(pos);
-
+            //lastPositions.Add(pos);
             //Debug.WriteLine(lastPositions[i++]);
 
-            updateRotation(camera);
-            updateVelocity();
+            UpdateRotation(camera);
+            MoveWASD();
             base.Update(camera);
         }
 
-        private void updateRotation(Camera camera)
+        private void UpdateRotation(Camera camera)
         {
-            var rectangle = camera.worldSpaceToCameraSpace(this);
+            var rectangle = camera.WorldSpaceToCameraSpace(this);
             MouseState mouse = Mouse.GetState();
             var distance = new Vector2(mouse.X - rectangle.X, mouse.Y - rectangle.Y);
             rot = (float)Math.Atan2(distance.Y, distance.X);
@@ -54,7 +53,7 @@ namespace RPG_Dom
 
 
         // MOVE MOVEMENT CONTROLLS TO CharacterControl CLASS!!
-        private void updateVelocity()
+        public void MoveWASD()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.S)) 
             {
@@ -95,22 +94,22 @@ namespace RPG_Dom
             }
         }
       
-        public Bullet createBulletPrimary()
+        public Bullet CreateBulletPrimary()
         {
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width - 10, myObject.Bounds.Height - 10),
                     new Vector2((float)Math.Cos(rot),(float)Math.Sin(rot)) * 10f,
-                    rot, 100);
+                    rot);
         }
 
-        public Bullet createBulletSecondary()
+        public Bullet CreateBulletSecondary()
         {
             return new Bullet("Assets\\item8BIT_sword",
                     new Vector2(pos.X, pos.Y),
                     new Vector2(myObject.Bounds.Width + 50, myObject.Bounds.Height + 50),
                     new Vector2((float)Math.Cos(rot), (float)Math.Sin(rot)) * 10f,
-                    rot, 100);
+                    rot);
         }
 
 

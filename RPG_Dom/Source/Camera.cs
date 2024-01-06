@@ -27,7 +27,7 @@ namespace RPG_Dom
             POS = pos;
         }
 
-        public Rectangle worldSpaceToCameraSpace(Object2d sprite)
+        public Rectangle WorldSpaceToCameraSpace(Object2d sprite)
         {
             var x_1 = sprite.pos.X - pos.X + Globals.gDM.PreferredBackBufferWidth / 2;
             var y_1 = sprite.pos.Y - pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;

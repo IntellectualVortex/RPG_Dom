@@ -18,7 +18,7 @@ namespace RPG_Dom
         Rectangle healthRect;
         
 
-        public HealthBar(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT, HEALTH)
+        public HealthBar(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
            
         }  
@@ -31,7 +31,7 @@ namespace RPG_Dom
 
         public override void Draw(float layer, Camera camera)
         {
-            var rectangle = camera.worldSpaceToCameraSpace(this);
+            var rectangle = camera.WorldSpaceToCameraSpace(this);
             Globals.spriteBatch.Draw(myObject,
                 new Rectangle(
                     Globals.gDM.PreferredBackBufferWidth / 2,
