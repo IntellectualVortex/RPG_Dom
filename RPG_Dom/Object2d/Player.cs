@@ -23,6 +23,12 @@ namespace RPG_Dom
         public float critChance = 20;
         public float baseAttack = 10;
 
+
+        //MAKE MAX HEALTH EQUAL TO DIMS for X WIDTH FOR HEALTH BAR
+        public float maxHealth;
+        public float health;
+
+        HealthBar healthBar;
         public float speedMult;
         //public List<Vector2> lastPositions = new List<Vector2>();
 
@@ -30,6 +36,10 @@ namespace RPG_Dom
         public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
         {
             speedMult = SPEEDMULT;
+
+            var back = Globals.content.Load<Texture2D>("Assets\\back");
+            var front = Globals.content.Load<Texture2D>("Assets\\front");
+            healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 100);
         }
 
         public override void Update(Camera camera)
@@ -37,7 +47,7 @@ namespace RPG_Dom
             
             //lastPositions.Add(pos);
             //Debug.WriteLine(lastPositions[i++]);
-
+            healthBar.Update(camera);
             UpdateRotation(camera);
             GetVelocity();
             base.Update(camera);
@@ -115,6 +125,9 @@ namespace RPG_Dom
 
         public override void Draw(float layer, Camera camera)
         {
+
+            healthBar.Draw(camera);
+
             SpriteEffects flipDirection;
 
             if (Math.Abs(rot) <= Math.PI / 2)

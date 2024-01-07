@@ -48,11 +48,6 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f);
 
-            healthBar = new HealthBar("Assets\\front",
-                new Vector2(5000, 5000),
-                new Vector2(100, 100),
-                new Vector2(0, 0), 0f);
-
 
        
             for (int i = 0; i < numOfBarbs; i++)
@@ -126,7 +121,7 @@ namespace RPG_Dom
 
             player.Update(camera);
 
-            healthBar.Update(camera);
+           
 
             // Create IUpdateable interface
             foreach (Object2d obj in playerObjects)
@@ -207,7 +202,6 @@ namespace RPG_Dom
                 obj.Draw(0.5f, camera);
             }
 
-            healthBar.Draw(0.5f, camera);
         }
     }
 }
