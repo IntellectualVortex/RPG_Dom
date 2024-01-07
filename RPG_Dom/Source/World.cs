@@ -48,9 +48,13 @@ namespace RPG_Dom
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f);
 
-       
+            healthBar = new HealthBar("Assets\\front",
+                new Vector2(5000, 5000),
+                new Vector2(100, 100),
+                new Vector2(0, 0), 0f);
 
-            // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+       
             for (int i = 0; i < numOfBarbs; i++)
             {
                 enemyObjects.Add(BarbarianFactory.Create(player));
@@ -69,6 +73,7 @@ namespace RPG_Dom
 
             
             playerObjects.Add(player);
+            
 
 
 
@@ -121,7 +126,7 @@ namespace RPG_Dom
 
             player.Update(camera);
 
-
+            healthBar.Update(camera);
 
             // Create IUpdateable interface
             foreach (Object2d obj in playerObjects)
@@ -143,6 +148,7 @@ namespace RPG_Dom
             {
                 obj.Update(camera);
             }
+
 
 
             //IMPLEMENT COLLISION FROM COLLISION.CS
@@ -201,6 +207,7 @@ namespace RPG_Dom
                 obj.Draw(0.5f, camera);
             }
 
+            healthBar.Draw(0.5f, camera);
         }
     }
 }

@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Assets/back.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/back.png
+
 #begin Assets/barb.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +61,7 @@
 /processorParam:TextureFormat=Color
 /build:Assets/element_red_rectangle.png
 
-#begin Assets/hud_heartFull.png
+#begin Assets/front.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,7 +71,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Assets/hud_heartFull.png
+/build:Assets/front.png
 
 #begin Assets/hud_heartFull.png
 /importer:TextureImporter
