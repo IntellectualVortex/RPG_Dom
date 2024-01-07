@@ -12,6 +12,8 @@ namespace RPG_Dom
         Player player;
 
         public string name;
+        public HealthBar healthbar;
+        int currentHealth = 100;
 
         public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
         {
@@ -26,6 +28,10 @@ namespace RPG_Dom
             base.Update(camera);
         }
 
+        void TakeDamage()
+        {
+            currentHealth -= 10;
+        }
 
         public void Move(Camera camera)
         {

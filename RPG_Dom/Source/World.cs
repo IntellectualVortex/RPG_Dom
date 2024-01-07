@@ -24,7 +24,7 @@ namespace RPG_Dom
         Random rnd = new Random();
 
         List<Object2d> playerObjects = new List<Object2d>();
-        List<Object2d> enemies = new List<Object2d>();
+        List<Object2d> enemyObjects = new List<Object2d>();
         List<Object2d> worldObjects = new List<Object2d>();
         List<Object2d> consumables = new List<Object2d>();
         List<Object2d> pets = new List<Object2d>();
@@ -42,28 +42,18 @@ namespace RPG_Dom
 
         public World()
         {
-            // Create factory, classes that return some new instances of these class, could make e.g.:
-            // - PlayerFactory with create() which return an instance of Player etc
-            // - PlayerPetFactory with public PlayerPet create(Player player) which return an instance of Player etc
-            // - ConsumableFactory with public Consumable create(Barbarian barb) which return an instance of Player etc
-
-            healthBar = new HealthBar("Assets\\element_red_rectangle",
-                new Vector2(5000, 5000),
-                new Vector2(100, 100),
-                new Vector2(1, 0), 0f);
 
             player = new Player(10, "Assets\\Knight",
                 new Vector2(5000, 5000),
                 new Vector2(100, 100),
                 new Vector2(0, 0), 0f);
 
-           
-            
+       
 
             // WHY DOES THIS SHIT NOT WORK BUT CREATING MANUALLY BELOW DOES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             for (int i = 0; i < numOfBarbs; i++)
             {
-                enemies.Add(BarbarianFactory.Create(player));
+                enemyObjects.Add(BarbarianFactory.Create(player));
             }
 
 
@@ -77,7 +67,7 @@ namespace RPG_Dom
 
             camera = new Camera(new Vector2(player.pos.X, player.pos.Y));
 
-            playerObjects.Add(healthBar);
+            
             playerObjects.Add(player);
 
 
@@ -139,7 +129,7 @@ namespace RPG_Dom
                 obj.Update(camera);
             }
 
-            foreach (Object2d enemy in enemies)
+            foreach (Object2d enemy in enemyObjects)
             {
                 enemy.Update(camera);
             }
@@ -158,12 +148,12 @@ namespace RPG_Dom
             //IMPLEMENT COLLISION FROM COLLISION.CS
             
 
-            List<CollisionEvent<Object2d>> collisions = Collision.ObjectListCollision(enemies, playerObjects);
+            List<CollisionEvent<Object2d>> collisions = Collision.ObjectListCollision(enemyObjects, playerObjects);
             
             foreach (CollisionEvent<Object2d> collision in collisions)
             {
                 // How to create pet factory using collision pos data?
-                enemies.Remove(collision.CollidingObject1);
+                enemyObjects.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
                 powerup = new PowerUp("Assets\\chest_open_3",
                                new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
@@ -192,7 +182,7 @@ namespace RPG_Dom
             map.Draw(0.1f, camera);
             player.Draw(0f, camera);
 
-            foreach (Object2d enemy in enemies)
+            foreach (Object2d enemy in enemyObjects)
             {
                 enemy.Draw(0f, camera);
             }

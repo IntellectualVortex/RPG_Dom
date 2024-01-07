@@ -15,9 +15,7 @@ using System.Linq;
 namespace RPG_Dom
 {
     public static class BarbarianFactory
-    {
-
-        static BarbarianFactory() { }
+    { 
 
         public static BarbarianEnemy Create(Player player)
         {

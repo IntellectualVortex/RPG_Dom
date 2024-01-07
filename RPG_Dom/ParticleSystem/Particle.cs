@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPG_Dom
+namespace RPG_Dom.ParticleSystem
 {
-    internal class HealthbarFactory
+    internal class Particle
     {
     }
 }
