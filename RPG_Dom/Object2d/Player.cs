@@ -26,7 +26,6 @@ namespace RPG_Dom
 
         //MAKE MAX HEALTH EQUAL TO DIMS for X WIDTH FOR HEALTH BAR
         public float maxHealth;
-        public float health;
 
         HealthBar healthBar;
         public float speedMult;
@@ -39,15 +38,14 @@ namespace RPG_Dom
 
             var back = Globals.content.Load<Texture2D>("Assets\\back");
             var front = Globals.content.Load<Texture2D>("Assets\\front");
-            healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 100);
+            healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 100f);
         }
 
         public override void Update(Camera camera)
         {
-            
             //lastPositions.Add(pos);
             //Debug.WriteLine(lastPositions[i++]);
-            healthBar.Update(camera);
+            healthBar.Update(100f);
             UpdateRotation(camera);
             GetVelocity();
             base.Update(camera);

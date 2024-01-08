@@ -14,10 +14,9 @@ namespace RPG_Dom
 {
     public class HealthBar : ObjectUI
     {
-        int health = 0;
-        Rectangle healthRect;
-        float currentValue;
-        float maxValue;
+        public Rectangle healthRect;
+        public float currentValue;
+        public float maxValue;
         Texture2D foreground;
         Texture2D background;
 
@@ -37,24 +36,20 @@ namespace RPG_Dom
 
         public void SetHealthBar(Object2d sprite)
         {
-            health = 100;
             healthRect = new Rectangle(Globals.gDM.PreferredBackBufferWidth / 2,
                     Globals.gDM.PreferredBackBufferHeight / 2 - 40, 
                     foreground.Width, foreground.Height);
         }
 
-        public Rectangle WorldSpaceToCameraSpace()
-        {
-            var x_1 = pos.X - pos.X + Globals.gDM.PreferredBackBufferWidth / 2;
-            var y_1 = pos.Y - pos.Y + Globals.gDM.PreferredBackBufferHeight / 2;
-            return new Rectangle((int)x_1, (int)y_1, (int)healthRect.Width, (int)healthRect.Height);
-        }
-
         public override void Draw(Camera camera)
         {
-            var rectangle = camera.WorldSpaceToCameraSpace(this);
+            
             Globals.spriteBatch.Draw(foreground,
-                rectangle,
+                new Rectangle(
+                    Globals.gDM.PreferredBackBufferWidth / 2,
+                    Globals.gDM.PreferredBackBufferHeight / 2,
+                    (int)healthRect.Width,
+                    (int)healthRect.Height),
                 null,
                 Color.White,
                 0f,
@@ -63,7 +58,11 @@ namespace RPG_Dom
                 0.6f);
 
             Globals.spriteBatch.Draw(background,
-                rectangle,
+                new Rectangle(
+                    Globals.gDM.PreferredBackBufferWidth / 2,
+                    Globals.gDM.PreferredBackBufferHeight / 2,
+                    (int)healthRect.Width,
+                    (int)healthRect.Height),
                 null,
                 Color.White,
                 0f,

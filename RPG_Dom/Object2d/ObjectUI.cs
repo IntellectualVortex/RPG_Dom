@@ -18,8 +18,6 @@ namespace RPG_Dom
         public ObjectUI(Vector2 POS)
         {
             pos = POS;
-     
-        
         }
 
         public virtual void Update(Camera camera)
