@@ -36,7 +36,7 @@ namespace RPG_Dom
         {
             currentValue = value;
             healthRect.Width = (int)(currentValue / maxValue * foreground.Height);
-            Debug.WriteLine(healthRect.Width);
+            
         }
 
 
