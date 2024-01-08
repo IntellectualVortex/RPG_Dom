@@ -14,7 +14,7 @@ namespace RPG_Dom
     {
  
         public Vector2 pos, dims, vel;
-        public float rot, health;
+        public float rot;
         public Texture2D myObject;
 
 

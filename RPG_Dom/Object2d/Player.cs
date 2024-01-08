@@ -36,7 +36,7 @@ namespace RPG_Dom
         public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH=150f) : base(PATH, POS, DIMS, VEL, ROT) 
         {
             speedMult = SPEEDMULT;
-            maxHealth = HEALTH;
+            //maxHealth = HEALTH;
             health = HEALTH;
 
             var back = Globals.content.Load<Texture2D>("Assets\\back");
