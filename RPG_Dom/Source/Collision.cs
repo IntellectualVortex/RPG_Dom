@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -14,7 +15,7 @@ namespace RPG_Dom
         static Collision() { }
     
 
-        public static List<CollisionEvent<T>> ObjectListCollision<T>(List<T> objList, List<T> objList2) where T : IHitbox
+        public static List<CollisionEvent<T>> ObjectListCollision<T>(List<T> objList, List<T> objList2) where T : IHitbox, IHealthbar
         {
 
             List<CollisionEvent<T>> CollisionEvents = new List<CollisionEvent<T>>();
@@ -23,9 +24,18 @@ namespace RPG_Dom
             {
                 for (var i = 0; i < objList2.Count; i++)
                 {
-                    if (objList[j].Hitbox().Intersects(objList2[i].Hitbox()))
+
+                    // Add both the enemy and the bullet to the CollisionEvent if health equal to or below 0
+                    if (objList[j].Hitbox().Intersects(objList2[i].Hitbox()) && objList[j].GetHealth() <= 0)
                     {
                         CollisionEvents.Add(new CollisionEvent<T>(objList[j], objList2[i]));
+                    }
+
+
+                    // Only add bullet to the CollisionEvent for removal on hit if health above 0
+                    else if (objList[j].Hitbox().Intersects(objList2[i].Hitbox()) && objList[j].GetHealth() > 0)
+                    {
+                        CollisionEvents.Add(new CollisionEvent<T>(default, objList2[i]));
                     }
                 }
             }

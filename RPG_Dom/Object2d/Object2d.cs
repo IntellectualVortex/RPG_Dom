@@ -10,16 +10,21 @@ using System;
 
 namespace RPG_Dom
 {
-    public class Object2d : IHitbox
+    public class Object2d : IHitbox, IHealthbar
     {
  
         public Vector2 pos, dims, vel;
-        public float rot;
+        public float rot, health;
         public Texture2D myObject;
 
 
         public Rectangle Hitbox() {
             return new Rectangle((int)pos.X - myObject.Width / 2, (int)pos.Y - myObject.Height / 2, myObject.Width, myObject.Height);
+        }
+
+        public float GetHealth()
+        {
+            return health;
         }
 
         public Object2d(string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT)

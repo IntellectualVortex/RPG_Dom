@@ -154,14 +154,15 @@ namespace RPG_Dom
             foreach (CollisionEvent<Object2d> collision in collisions)
             {
                 // How to create pet factory using collision pos data?
+                
                 enemyObjects.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
-                powerup = new PowerUp("Assets\\chest_open_3",
+               /* powerup = new PowerUp("Assets\\chest_open_3",
                                new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
                                new Vector2(100, 100),
                                new Vector2(0, 0),
                                0f);
-                consumables.Add(powerup);
+                consumables.Add(powerup);*/
             }
 
 

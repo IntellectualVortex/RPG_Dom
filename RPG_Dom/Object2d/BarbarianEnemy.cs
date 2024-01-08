@@ -7,13 +7,19 @@ using System.Drawing;
 
 namespace RPG_Dom
 {
-    public class BarbarianEnemy : Object2d
+    public class BarbarianEnemy : Object2d, IHealthbar
     {
         Player player;
 
         public string name;
         public HealthBar healthbar;
         public float health = 100;
+
+
+        public float GetHealth()
+        {
+            return health;
+        }
 
         public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT)
         {
@@ -24,12 +30,12 @@ namespace RPG_Dom
 
         public override void Update(Camera camera)
         {
+            GetHealth();    
             UpdateRotation(camera);
             Move(camera);
             base.Update(camera);
         }
 
-        
 
         public void TakeDamage()
         {
