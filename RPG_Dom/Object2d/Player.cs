@@ -26,26 +26,35 @@ namespace RPG_Dom
 
         //MAKE MAX HEALTH EQUAL TO DIMS for X WIDTH FOR HEALTH BAR
         public float maxHealth;
+        public float health;
 
         HealthBar healthBar;
         public float speedMult;
         //public List<Vector2> lastPositions = new List<Vector2>();
 
 
-        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT) 
+        public Player(int SPEEDMULT, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH=150f) : base(PATH, POS, DIMS, VEL, ROT) 
         {
             speedMult = SPEEDMULT;
+            maxHealth = HEALTH;
+            health = HEALTH;
 
             var back = Globals.content.Load<Texture2D>("Assets\\back");
             var front = Globals.content.Load<Texture2D>("Assets\\front");
             healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 150f);
         }
 
+        public void TakeDamage(float dmg)
+        {
+            health -= dmg;
+        }
+
+
         public override void Update(Camera camera)
         {
             //lastPositions.Add(pos);
             //Debug.WriteLine(lastPositions[i++]);
-            healthBar.Update(100f);
+            healthBar.Update(health);
             UpdateRotation(camera);
             GetVelocity();
             base.Update(camera);
@@ -69,6 +78,7 @@ namespace RPG_Dom
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.W)) {
                 vel.Y = -1;
+                
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S)) {
                 vel.Y = 1;

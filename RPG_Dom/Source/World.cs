@@ -123,7 +123,7 @@ namespace RPG_Dom
 
            
 
-            // Create IUpdateable interface
+            // Create IUpdateable interface, where IUpdateable then .Update() the group
             foreach (Object2d obj in playerObjects)
             {
                 obj.Update(camera);
@@ -169,6 +169,7 @@ namespace RPG_Dom
 
             foreach (CollisionEvent<Object2d> collision in consumableCollisions)
             {
+                player.TakeDamage(10f);
                 pets.Add(PlayerPetFactory.Create(player));
                 consumables.Remove(collision.CollidingObject2);
                 player.primaryCooldownTimer += 100;

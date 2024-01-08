@@ -15,7 +15,7 @@ namespace RPG_Dom
 {
     public class HealthBar : ObjectUI
     {
-        public Rectangle healthRect;
+        Rectangle healthRect;
         float currentValue;
         float maxValue;
         Texture2D foreground;
@@ -26,10 +26,10 @@ namespace RPG_Dom
             maxValue = MAXVALUE;
             foreground = FOREGROUND;
             background = BACKGROUND;
-
+            
             healthRect = new Rectangle(Globals.gDM.PreferredBackBufferWidth / 2,
                 Globals.gDM.PreferredBackBufferHeight / 2 - 40,
-                healthRect.Width, healthRect.Height);
+                foreground.Width, foreground.Height);
         }  
 
         public virtual void Update(float value) 
@@ -49,7 +49,7 @@ namespace RPG_Dom
                 0f,
                 new Vector2(foreground.Bounds.Width / 2, foreground.Bounds.Height / 2),
                 new SpriteEffects(),
-                0.6f);
+                0.5f);
 
             Globals.spriteBatch.Draw(background,
                 healthRect,
