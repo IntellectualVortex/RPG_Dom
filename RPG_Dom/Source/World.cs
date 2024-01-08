@@ -157,7 +157,9 @@ namespace RPG_Dom
                 
                 enemyObjects.Remove(collision.CollidingObject1);
                 playerObjects.Remove(collision.CollidingObject2);
-               /* powerup = new PowerUp("Assets\\chest_open_3",
+
+                // Check if CollidingObjects exist before creating powerUp
+/*                powerup = new PowerUp("Assets\\chest_open_3",
                                new Vector2(collision.CollidingObject1.pos.X, collision.CollidingObject1.pos.Y),
                                new Vector2(100, 100),
                                new Vector2(0, 0),
