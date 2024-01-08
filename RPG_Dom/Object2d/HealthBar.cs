@@ -29,7 +29,7 @@ namespace RPG_Dom
             
             healthRect = new Rectangle(Globals.gDM.PreferredBackBufferWidth / 2,
                 Globals.gDM.PreferredBackBufferHeight / 2 - 40,
-                foreground.Width, foreground.Height);
+                foreground.Width, foreground.Height/2);
         }  
 
         public virtual void Update(float value) 
