@@ -13,10 +13,11 @@ namespace RPG_Dom
 
         public string name;
         public HealthBar healthbar;
-        int currentHealth = 100;
+        public float health = 100;
 
-        public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT) : base(PATH, POS, DIMS, VEL, ROT)
+        public BarbarianEnemy(Player PLAYER, string PATH, Vector2 POS, Vector2 DIMS, Vector2 VEL, float ROT, float HEALTH) : base(PATH, POS, DIMS, VEL, ROT)
         {
+            health = HEALTH;
             player = PLAYER;
         }
 
@@ -28,9 +29,11 @@ namespace RPG_Dom
             base.Update(camera);
         }
 
-        void TakeDamage()
+        
+
+        public void TakeDamage()
         {
-            currentHealth -= 10;
+            health -= 10;
         }
 
         public void Move(Camera camera)

@@ -24,7 +24,7 @@ namespace RPG_Dom
                 "Assets\\barb",
                 new Vector2(5500 + rnd.Next(-500, 500), 5000 + rnd.Next(-500, 500)),
                 new Vector2(120, 120),
-                new Vector2(1, 0), 0f);
+                new Vector2(1, 0), 0f, 100f);
         }
     }
 }
