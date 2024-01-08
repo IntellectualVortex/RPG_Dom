@@ -38,7 +38,7 @@ namespace RPG_Dom
 
             var back = Globals.content.Load<Texture2D>("Assets\\back");
             var front = Globals.content.Load<Texture2D>("Assets\\front");
-            healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 100f);
+            healthBar = new HealthBar(front, back, new Vector2(pos.X, pos.Y), 150f);
         }
 
         public override void Update(Camera camera)
