@@ -53,6 +53,10 @@ namespace RPG_Dom
             else { }
         }
 
+        public void Heal(float healthConsumable)
+        {
+            health += healthConsumable;
+        }
 
         public override void Update(Camera camera)
         {
